@@ -2,9 +2,9 @@ package com.qinyuan.lib.image;
 
 import com.google.common.collect.Lists;
 import com.qinyuan.lib.lang.concurrent.ThreadPool;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +67,7 @@ public class MultiImageDownloader {
         public void run() {
             try {
                 String path = imageDownloader.save(imageUrl);
-                if (StringUtils.hasText(path)) {
+                if (StringUtils.isNotBlank(path)) {
                     paths.add(path);
                 }
             } catch (Exception e) {

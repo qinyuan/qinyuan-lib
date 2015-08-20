@@ -2,10 +2,10 @@ package com.qinyuan.lib.image;
 
 import com.qinyuan.lib.network.http.HttpClient;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -45,7 +45,7 @@ public class ImageDownloader {
      * @return save path of the image
      */
     public String save(String url) {
-        if (!StringUtils.hasText(url)) {
+        if (StringUtils.isBlank(url)) {
             String info = "empty url: '" + url + "'";
             LOGGER.error(info);
             throw new RuntimeException(info);
