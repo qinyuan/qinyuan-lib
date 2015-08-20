@@ -15,6 +15,7 @@
     </properties>
 
     <modules>
+      <module>qinyuan-lib-parent</module>
       <module>qinyuan-lib-lang</module>
       <module>qinyuan-lib-database</module>
       <module>qinyuan-lib-network</module>
