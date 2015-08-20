@@ -1,6 +1,6 @@
 package com.qinyuan.lib.mvc.controller;
 
-import java.lang.Math; /**
+/**
  * Tool class about pagination
  * Created by qinyuan on 15-4-5.
  */

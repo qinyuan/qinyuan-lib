@@ -8,7 +8,7 @@ import com.sun.image.codec.jpeg.JPEGImageDecoder;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;import java.lang.Exception;import java.lang.RuntimeException;import java.lang.String;
+import java.io.FileInputStream;
 
 /**
  * Class to parse image

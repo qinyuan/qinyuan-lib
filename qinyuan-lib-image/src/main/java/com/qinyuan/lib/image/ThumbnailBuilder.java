@@ -3,7 +3,7 @@ package com.qinyuan.lib.image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;import java.lang.Exception;import java.lang.String;
+import java.io.File;
 
 /**
  * Class about image thumbnail

@@ -1,7 +1,5 @@
 package com.qinyuan.lib.lang.concurrent;
 
-import com.qinyuan.lib.lang.concurrent.ThreadPool;
-import com.qinyuan.lib.lang.concurrent.ThreadUtils;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

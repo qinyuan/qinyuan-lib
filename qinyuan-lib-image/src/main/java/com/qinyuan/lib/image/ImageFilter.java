@@ -3,7 +3,7 @@ package com.qinyuan.lib.image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.Exception;import java.lang.String;import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**

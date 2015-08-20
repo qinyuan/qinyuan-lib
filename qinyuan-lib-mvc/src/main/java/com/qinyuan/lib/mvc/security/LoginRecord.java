@@ -1,7 +1,7 @@
 package com.qinyuan.lib.mvc.security;
 
-import com.qinyuan.lib.lang.DateUtils;
 import com.qinyuan.lib.database.hibernate.PersistObject;
+import com.qinyuan.lib.lang.DateUtils;
 
 public class LoginRecord extends PersistObject {
     private Integer userId;

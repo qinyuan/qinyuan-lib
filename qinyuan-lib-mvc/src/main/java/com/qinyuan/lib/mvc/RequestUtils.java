@@ -1,7 +1,5 @@
 package com.qinyuan.lib.mvc;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Tool Class about request
  * Created by qinyuan on 15-3-27.

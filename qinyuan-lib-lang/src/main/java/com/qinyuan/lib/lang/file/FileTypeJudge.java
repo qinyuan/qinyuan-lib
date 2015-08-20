@@ -1,8 +1,8 @@
 package com.qinyuan.lib.lang.file;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -66,7 +66,7 @@ public class FileTypeJudge {
      */
     public FileType getType(String filePath) {
         String fileHead = getFileHead(filePath);
-        if (!StringUtils.hasLength(fileHead)) {
+        if (StringUtils.isBlank(fileHead)) {
             return null;
         }
 

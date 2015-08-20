@@ -1,7 +1,7 @@
 package com.qinyuan.lib.mvc.controller;
 
-import com.qinyuan.lib.lang.StringUtils;
 import com.qinyuan.lib.config.ImageConfig;
+import com.qinyuan.lib.lang.StringUtils;
 
 /**
  * Class to adapter image url
