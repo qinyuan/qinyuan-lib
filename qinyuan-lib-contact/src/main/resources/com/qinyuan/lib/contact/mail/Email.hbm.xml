@@ -3,8 +3,8 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.qinyuan.lib.contact">
-    <class name="mail.Email" table="email">
+<hibernate-mapping package="com.qinyuan.lib.contact.mail">
+    <class name="Email" table="email">
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
