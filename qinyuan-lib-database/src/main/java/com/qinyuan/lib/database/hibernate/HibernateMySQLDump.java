@@ -4,9 +4,9 @@ import com.qinyuan.lib.database.MySQLDump;
 import com.qinyuan.lib.lang.DateUtils;
 import com.qinyuan.lib.lang.file.ZipUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 
@@ -45,7 +45,7 @@ public class HibernateMySQLDump {
         mySQLDump.setUser(HibernatePropertyUtils.getUsername());
         mySQLDump.setPassword(HibernatePropertyUtils.getPassword());
         mySQLDump.setHost(HibernatePropertyUtils.getHost());
-        if (StringUtils.hasText(binPath)) {
+        if (StringUtils.isNotBlank(binPath)) {
             mySQLDump.setBinPath(binPath);
         }
         if (password != null) {

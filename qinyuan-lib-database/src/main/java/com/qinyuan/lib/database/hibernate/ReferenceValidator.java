@@ -1,7 +1,7 @@
 package com.qinyuan.lib.database.hibernate;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,11 @@ public class ReferenceValidator {
     private List<Pair<String, String>> references = new ArrayList<>();
 
     public ReferenceValidator add(String referentialTable, String referentialField) {
-        if (!StringUtils.hasText(referentialTable)) {
+        if (StringUtils.isBlank(referentialTable)) {
             throw new IllegalArgumentException("referentialTable is empty");
         }
 
-        if (!StringUtils.hasText(referentialField)) {
+        if (StringUtils.isBlank(referentialField)) {
             throw new IllegalArgumentException("referentialField is empty");
         }
 

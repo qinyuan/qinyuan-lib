@@ -3,9 +3,9 @@ package com.qinyuan.lib.database.hibernate;
 import com.google.common.collect.Lists;
 import com.qinyuan.lib.lang.IntegerUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class RankingDao {
         }
         String hql = "FROM " + ranking.getClass().getSimpleName() +
                 " WHERE ranking<" + ranking.getRanking();
-        if (StringUtils.hasText(whereClause)) {
+        if (StringUtils.isNotBlank(whereClause)) {
             hql += " AND " + whereClause;
         }
         hql += DESC_ORDER;
@@ -87,7 +87,7 @@ public class RankingDao {
         }
         String hql = "FROM " + ranking.getClass().getSimpleName() +
                 " WHERE ranking>" + ranking.getRanking();
-        if (StringUtils.hasText(whereClause)) {
+        if (StringUtils.isNotBlank(whereClause)) {
             hql += " AND " + whereClause;
         }
         hql += ASC_ORDER;
@@ -145,8 +145,8 @@ public class RankingDao {
     private String getWhereClauseByLimitFields(java.lang.Object bean, List<String> limitFields) {
         String whereClause = "";
         for (String limitField : limitFields) {
-            if (StringUtils.hasText(limitField)) {
-                if (StringUtils.hasText(whereClause)) {
+            if (StringUtils.isNotBlank(limitField)) {
+                if (StringUtils.isNotBlank(whereClause)) {
                     whereClause += " AND ";
                 }
                 whereClause += getLimitFieldCondition(bean, limitField);

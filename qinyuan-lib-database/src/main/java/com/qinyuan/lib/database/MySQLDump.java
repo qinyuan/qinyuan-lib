@@ -3,9 +3,9 @@ package com.qinyuan.lib.database;
 import com.qinyuan.lib.lang.CommandExecuteResult;
 import com.qinyuan.lib.lang.CommandUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 
@@ -52,9 +52,9 @@ public class MySQLDump {
     }
 
     public void run() {
-        if (!StringUtils.hasText(backupPath)) {
+        if (StringUtils.isBlank(backupPath)) {
             LOGGER.error("Backup path is not set!");
-        } else if (!StringUtils.hasText(database)) {
+        } else if (StringUtils.isBlank(database)) {
             LOGGER.error("Database is not set!");
         }
 

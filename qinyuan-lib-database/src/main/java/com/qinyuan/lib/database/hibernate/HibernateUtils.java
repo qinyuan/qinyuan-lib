@@ -1,6 +1,7 @@
 package com.qinyuan.lib.database.hibernate;
 
 import com.qinyuan.lib.lang.IntegerUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +10,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -167,7 +167,7 @@ public class HibernateUtils {
     }
 
     private static String adjustWhereClause(String whereClause) {
-        if (!StringUtils.hasText(whereClause)) {
+        if (StringUtils.isBlank(whereClause)) {
             return "";
         }
         String lowerCaseString = whereClause.trim().toLowerCase();

@@ -1,7 +1,7 @@
 package com.qinyuan.lib.database.hibernate;
 
 import com.google.common.base.Joiner;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ class SQLConditionBuilder {
      * @return Object itself
      */
     public SQLConditionBuilder addFilter(String filter) {
-        if (!StringUtils.hasText(filter)) {
+        if (StringUtils.isBlank(filter)) {
             return this;
         }
 
@@ -39,7 +39,7 @@ class SQLConditionBuilder {
     }
 
     public SQLConditionBuilder addOrder(String field, boolean asc) {
-        if (!StringUtils.hasText(field)) {
+        if (StringUtils.isBlank(field)) {
             return this;
         }
 
@@ -52,7 +52,7 @@ class SQLConditionBuilder {
     }
 
     public SQLConditionBuilder addGroup(String field) {
-        if (!StringUtils.hasText(field)) {
+        if (StringUtils.isBlank(field)) {
             return this;
         }
 
