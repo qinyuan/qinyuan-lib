@@ -15,8 +15,14 @@
     </properties>
 
     <modules>
-      <module>qinyuan-lib-utils</module>
+      <module>qinyuan-lib-lang</module>
       <module>qinyuan-lib-database</module>
+      <module>qinyuan-lib-network</module>
+      <module>qinyuan-lib-image</module>
+      <module>qinyuan-lib-config</module>
+      <module>qinyuan-lib-mvc</module>
+      <module>qinyuan-lib-contact</module>
+      <module>qinyuan-lib-sns</module>
     </modules>
 
 </project>

@@ -20,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.qinyuan-lib</groupId>
+            <artifactId>qinyuan-lib-lang</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- dependencies of http client -->
         <dependency>
