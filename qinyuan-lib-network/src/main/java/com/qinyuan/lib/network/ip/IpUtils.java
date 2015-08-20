@@ -1,6 +1,6 @@
 package com.qinyuan.lib.network.ip;
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utility class about ip
@@ -17,7 +17,7 @@ public class IpUtils {
      * @return true if match and false if not
      */
     public static boolean isIPv4(String string) {
-        return StringUtils.hasText(string) &&
+        return StringUtils.isNotBlank(string) &&
                 string.matches("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
     }
 }

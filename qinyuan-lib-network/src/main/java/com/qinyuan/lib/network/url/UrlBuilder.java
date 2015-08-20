@@ -2,9 +2,9 @@ package com.qinyuan.lib.network.url;
 
 import com.google.common.base.Joiner;
 import com.qinyuan.lib.lang.IntegerUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class UrlBuilder {
     }
 
     public String build() {
-        if (!StringUtils.hasText(this.baseUrl)) {
+        if (StringUtils.isBlank(this.baseUrl)) {
             LOGGER.error("invalid baseUrl '{}'", baseUrl);
             return null;
         }
@@ -57,7 +57,7 @@ public class UrlBuilder {
                 continue;
             }
 
-            if (value instanceof String && (!StringUtils.hasText((String) value))) {
+            if (value instanceof String && (StringUtils.isBlank((String) value))) {
                 continue;
             }
 

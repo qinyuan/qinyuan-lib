@@ -1,9 +1,9 @@
 package com.qinyuan.lib.network.ip;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ public class BaiduIpLocationDataParser implements IpLocationDataParser {
 
     @Override
     public String parse(String locationData) {
-        if (!StringUtils.hasText(locationData)) {
+        if (StringUtils.isBlank(locationData)) {
             LOGGER.error("Fail to page location, location data is empty: {}", locationData);
             return null;
         }

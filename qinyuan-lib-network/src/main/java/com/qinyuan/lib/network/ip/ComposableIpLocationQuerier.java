@@ -1,9 +1,9 @@
 package com.qinyuan.lib.network.ip;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ComposableIpLocationQuerier implements IpLocationQuerier {
             }
             try {
                 String location = querier.getLocation(ip);
-                if (StringUtils.hasText(location)) {
+                if (StringUtils.isNotBlank(location)) {
                     return location;
                 }
             } catch (Exception e) {

@@ -1,9 +1,9 @@
 package com.qinyuan.lib.network.ip;
 
 import com.qinyuan.lib.network.http.HttpClient;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 /**
  * Query ip location information from network
@@ -26,7 +26,7 @@ public abstract class NetworkIpLocationQuerier implements IpLocationQuerier {
 
         HttpClient client = new HttpClient();
         String content = client.getContent(getUrl(ip));
-        if (!StringUtils.hasText(content)) {
+        if (StringUtils.isBlank(content)) {
             LOGGER.warn("Location data is empty: {}", content);
             return null;
         }
