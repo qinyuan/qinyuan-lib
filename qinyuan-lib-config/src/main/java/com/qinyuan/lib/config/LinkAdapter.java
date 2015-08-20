@@ -1,6 +1,6 @@
 package com.qinyuan.lib.config;
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class to adapt link
@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
  */
 public class LinkAdapter {
     public String adjust(String link) {
-        if (!StringUtils.hasText(link)) {
+        if (StringUtils.isBlank(link)) {
             return link;
         }
 
