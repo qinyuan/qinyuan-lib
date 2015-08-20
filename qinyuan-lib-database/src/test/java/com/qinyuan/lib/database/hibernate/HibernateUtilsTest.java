@@ -17,9 +17,9 @@ public class HibernateUtilsTest {
 
     @Test
     public void testSave() {
-        User user = new User();
+        /*User user = new User();
         user.setUsername("张三");
         user.setPassword("test");
-        HibernateUtils.save(user);
+        HibernateUtils.save(user);*/
     }
 }
