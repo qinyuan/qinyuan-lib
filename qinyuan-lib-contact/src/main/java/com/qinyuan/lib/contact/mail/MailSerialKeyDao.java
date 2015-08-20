@@ -5,7 +5,7 @@ import com.qinyuan.lib.database.hibernate.HibernateUtils;
 import com.qinyuan.lib.lang.DateUtils;
 import com.qinyuan.lib.lang.IntegerUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Date;
 
@@ -16,7 +16,7 @@ public class MailSerialKeyDao {
     private final int expireSeconds;
 
     public MailSerialKeyDao(String mailType, int expireSeconds) {
-        if (!StringUtils.hasText(mailType)) {
+        if (StringUtils.isBlank(mailType)) {
             throw new IllegalArgumentException("mailType can't be empty, real mailType: " + mailType);
         }
 
@@ -58,7 +58,7 @@ public class MailSerialKeyDao {
         }
 
         // validate send time
-        if (!StringUtils.hasText(mailSerialKey.getSendTime())) {
+        if (StringUtils.isBlank(mailSerialKey.getSendTime())) {
             return null;
         }
         Date sendTime = DateUtils.newDate(DateUtils.trimMilliSecond(mailSerialKey.getSendTime()));

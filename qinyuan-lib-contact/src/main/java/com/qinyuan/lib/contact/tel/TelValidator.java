@@ -1,6 +1,6 @@
 package com.qinyuan.lib.contact.tel;
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class to validate telephone number
@@ -8,6 +8,6 @@ import org.springframework.util.StringUtils;
  */
 public class TelValidator {
     public boolean validate(String tel) {
-        return StringUtils.hasText(tel) && tel.matches("^\\d{11}$");
+        return StringUtils.isNotBlank(tel) && tel.matches("^\\d{11}$");
     }
 }
