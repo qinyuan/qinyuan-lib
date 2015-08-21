@@ -110,4 +110,46 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+    <tag>
+        <name>date-select</name>
+        <tag-class>com.qinyuan.lib.mvc.tag.DateSelect</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>prefix</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>value</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>startYear</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <name>endYear</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+    </tag>
+    <tag>
+        <name>birthday-select</name>
+        <tag-class>com.qinyuan.lib.mvc.tag.BirthdaySelect</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>prefix</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>value</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
 </taglib>

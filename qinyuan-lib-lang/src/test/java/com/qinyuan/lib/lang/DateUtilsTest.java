@@ -46,6 +46,11 @@ public class DateUtilsTest {
     }
 
     @Test
+    public void dtestGetCurrentYear() {
+        System.out.println(DateUtils.currentYear());
+    }
+
+    @Test
     public void testNow() throws Exception {
         assertThat(DateUtils.now().getTime() - System.currentTimeMillis()).isGreaterThan(-2);
     }

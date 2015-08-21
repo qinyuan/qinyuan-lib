@@ -84,6 +84,10 @@ public class DateUtils {
         return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
     }
 
+    public static int currentYear(){
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
     public static Date now() {
         return new Date(System.currentTimeMillis());
     }
