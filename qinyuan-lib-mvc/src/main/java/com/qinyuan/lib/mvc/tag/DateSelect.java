@@ -4,15 +4,10 @@ import com.qinyuan.lib.lang.DateUtils;
 
 import javax.servlet.jsp.JspException;
 
-public class DateSelect extends MyTagSupport {
-    private String value;
+public class DateSelect extends Select {
     private String prefix = "";
     private int startYear = 1900;
     private int endYear = 2100;
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
@@ -37,18 +32,6 @@ public class DateSelect extends MyTagSupport {
         }
 
         print(" id=\"" + fullNameOrId + "\" name=\"" + fullNameOrId + "\"");
-    }
-
-    private void printOption(String optionValue, String defaultValue) {
-        print("<option value=\"" + optionValue + "\"");
-        if (optionValue.equals(defaultValue)) {
-            print(" selected");
-        }
-        print(">" + optionValue + "</option>");
-    }
-
-    private void printOption(int optionValue, int defaultValue) {
-        printOption(String.valueOf(optionValue), String.valueOf(defaultValue));
     }
 
     @Override
