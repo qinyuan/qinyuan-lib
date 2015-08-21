@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspException;
  * Tag class of css
  * Created by qinyuan on 15-6-14.
  */
-public class CssTag extends CssJsBaseTag {
+public class Css extends CssJsBase {
 
     private String href;
 

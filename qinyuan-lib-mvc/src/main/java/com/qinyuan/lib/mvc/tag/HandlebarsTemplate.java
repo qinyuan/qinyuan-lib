@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspException;
  * Tag about handlebars template
  * Created by qinyuan on 15-6-16.
  */
-public class HandlebarsTemplateTag extends MyTagSupport {
+public class HandlebarsTemplate extends MyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         print("<script id=\"" + this.getId() + "\" type=\"text/x-handlebars-template\">");

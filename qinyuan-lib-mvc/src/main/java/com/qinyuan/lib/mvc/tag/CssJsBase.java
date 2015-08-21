@@ -1,10 +1,10 @@
 package com.qinyuan.lib.mvc.tag;
 
 /**
- * Base Class of CssTag and JsTag
+ * Base Class of Css and Js
  * Created by qinyuan on 15-6-14.
  */
-public class CssJsBaseTag extends MyTagSupport {
+class CssJsBase extends MyTagSupport {
     private final static long VERSION = System.currentTimeMillis();
     private boolean version;
     protected final static String PREFIX = "resources";

@@ -10,7 +10,7 @@
     <uri>http://www.qinyuan15.com</uri>
     <tag>
         <name>js</name>
-        <tag-class>com.qinyuan.lib.mvc.tag.JsTag</tag-class>
+        <tag-class>com.qinyuan.lib.mvc.tag.Js</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>src</name>
@@ -26,7 +26,7 @@
     </tag>
     <tag>
         <name>css</name>
-        <tag-class>com.qinyuan.lib.mvc.tag.CssTag</tag-class>
+        <tag-class>com.qinyuan.lib.mvc.tag.Css</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>href</name>
@@ -67,7 +67,7 @@
     </tag>
     <tag>
         <name>spring-remember-login</name>
-        <tag-class>com.qinyuan.lib.mvc.tag.SpringRememberLoginTag</tag-class>
+        <tag-class>com.qinyuan.lib.mvc.tag.SpringRememberLogin</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>id</name>
@@ -77,11 +77,36 @@
     </tag>
     <tag>
         <name>handlebars-template</name>
-        <tag-class>com.qinyuan.lib.mvc.tag.HandlebarsTemplateTag</tag-class>
+        <tag-class>com.qinyuan.lib.mvc.tag.HandlebarsTemplate</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>id</name>
             <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>gender-select</name>
+        <tag-class>com.qinyuan.lib.mvc.tag.GenderSelect</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>emptyText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>value</name>
+            <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>

@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspException;
  * Tag class of js
  * Created by qinyuan on 15-6-14.
  */
-public class JsTag extends CssJsBaseTag {
+public class Js extends CssJsBase {
     private String src;
 
     public void setSrc(String src) {
