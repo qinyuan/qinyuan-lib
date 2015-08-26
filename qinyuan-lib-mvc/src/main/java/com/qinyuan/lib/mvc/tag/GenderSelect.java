@@ -3,6 +3,7 @@ package com.qinyuan.lib.mvc.tag;
 import com.google.common.collect.Lists;
 
 import javax.servlet.jsp.JspException;
+import java.util.List;
 
 public class GenderSelect extends Select {
     private String emptyText = "";
@@ -18,7 +19,11 @@ public class GenderSelect extends Select {
         printName();
         print(">");
 
-        for (String string : Lists.newArrayList(emptyText, "男", "女")) {
+        List<String> options = Lists.newArrayList("男", "女");
+        if (!options.contains(value)) {
+            options.add(0, emptyText);
+        }
+        for (String string : options) {
             printOption(string);
         }
 

@@ -29,7 +29,7 @@ public class HibernateListBuilder {
 
     public HibernateListBuilder addEqualFilter(String field, Object value) {
         if (field.contains(".")) {
-            String adjustField = field.replace(",", "__");
+            String adjustField = field.replace(".", "__");
             conditionBuilder.addFilter(field + "=:" + adjustField);
             return this.addArgument(adjustField, value);
         } else {
