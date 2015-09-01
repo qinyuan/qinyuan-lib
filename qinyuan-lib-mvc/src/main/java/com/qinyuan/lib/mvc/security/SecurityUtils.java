@@ -19,7 +19,9 @@ public class SecurityUtils {
 
     public static UserDetails getUserDetails() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (userDetails instanceof UserDetails) {
+        if (userDetails == null || userDetails.equals("anonymousUser")) {
+            return null;
+        } else if (userDetails instanceof UserDetails) {
             return (UserDetails) userDetails;
         } else {
             LOGGER.info("userDetails is String, whose value is {}", userDetails);

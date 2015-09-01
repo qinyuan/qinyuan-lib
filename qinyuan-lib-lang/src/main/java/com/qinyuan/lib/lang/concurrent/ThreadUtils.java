@@ -18,6 +18,9 @@ public class ThreadUtils {
     }
 
     private static void sleepByMillSecond(long millSecond) {
+        if (millSecond < 0) {
+            millSecond = -millSecond;
+        }
         try {
             Thread.sleep(millSecond);
         } catch (Exception e) {
