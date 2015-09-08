@@ -37,7 +37,8 @@ public class HibernateUpdater {
 
     public void update(Class<?> clazz, String setClause) {
         Session session = HibernateUtils.getSession();
-        String hql = "UPDATE " + clazz.getSimpleName() + " SET " + setClause;
+        String hql = "UPDATE " + clazz.getSimpleName() + " SET " + setClause
+                + " " + conditionBuilder.build();
         try {
             this.queryBuilder.buildQuery(session, hql).executeUpdate();
         } catch (Throwable e) {
