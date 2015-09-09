@@ -7,7 +7,6 @@ import javax.servlet.jsp.JspException;
  * Created by qinyuan on 15-6-16.
  */
 public class MultipartForm extends MyTagSupport {
-
     private String action;
 
     public void setAction(String action) {
@@ -18,6 +17,7 @@ public class MultipartForm extends MyTagSupport {
     public int doStartTag() throws JspException {
         print("<form method=\"post\" ");
         printId();
+        printCssClass();
         print("action=\"");
         print(action);
         print("\" enctype=\"multipart/form-data\">");

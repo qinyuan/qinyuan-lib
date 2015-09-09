@@ -36,7 +36,7 @@ public class DateSelect extends Select {
 
     @Override
     public int doEndTag() throws JspException {
-        DateElementHolder dateElementHolder = new DateElementHolder(value);
+        DateElementHolder dateElementHolder = new DateElementHolder(getValue());
 
         // print year select
         print("<select");

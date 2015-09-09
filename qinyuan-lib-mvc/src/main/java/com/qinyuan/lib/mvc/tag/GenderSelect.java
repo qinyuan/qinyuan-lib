@@ -20,7 +20,7 @@ public class GenderSelect extends Select {
         print(">");
 
         List<String> options = Lists.newArrayList("男", "女");
-        if (!options.contains(value)) {
+        if (!options.contains(getValue())) {
             options.add(0, emptyText);
         }
         for (String string : options) {

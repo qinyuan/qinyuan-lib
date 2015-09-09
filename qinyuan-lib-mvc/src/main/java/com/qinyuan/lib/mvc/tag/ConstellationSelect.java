@@ -16,7 +16,7 @@ public class ConstellationSelect extends Select {
         printName();
         print(">");
 
-        if (Arrays.binarySearch(constellations, value) < 0) {
+        if (Arrays.binarySearch(constellations, getValue()) < 0) {
             printOption("", "");
         }
         for (String constellation : constellations) {
