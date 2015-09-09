@@ -16,8 +16,8 @@ public class MultipartForm extends MyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         print("<form method=\"post\" ");
-        printId();
-        printCssClass();
+        printIdIfNotBlank();
+        printCssClassIfNotBlank();
         print("action=\"");
         print(action);
         print("\" enctype=\"multipart/form-data\">");

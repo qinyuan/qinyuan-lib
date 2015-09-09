@@ -12,8 +12,8 @@ public class ConstellationSelect extends Select {
     @Override
     public int doEndTag() throws JspException {
         print("<select ");
-        printId();
-        printName();
+        printIdIfNotBlank();
+        printNameIfNotBlank();
         print(">");
 
         if (Arrays.binarySearch(constellations, getValue()) < 0) {

@@ -11,7 +11,7 @@ public class SpringLoginForm extends MyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         print("<form method=\"post\" ");
-        printId();
+        printIdIfNotBlank();
         print("action=\"j_spring_security_check\">");
         return EVAL_PAGE;
     }

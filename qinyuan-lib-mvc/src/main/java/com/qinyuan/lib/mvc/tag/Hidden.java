@@ -8,9 +8,9 @@ public class Hidden extends CssJsBase {
     public int doEndTag() throws JspException {
         print("<input type=\"hidden\" ");
 
-        printId();
-        printName();
-        printCssClass();
+        printIdIfNotBlank();
+        printNameIfNotBlank();
+        printCssClassIfNotBlank();
         printValue();
 
         print("/>");

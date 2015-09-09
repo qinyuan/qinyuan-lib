@@ -53,26 +53,33 @@ class MyTagSupport extends TagSupport {
         }
     }
 
-    protected void printAttribute(String key, String value) {
+    protected void printAttributeIfNotBlank(String key, String value) {
         if (StringUtils.hasText(value)) {
-            print(" " + key + "=\"" + value + "\" ");
+            printAttribute(key, value);
         }
     }
 
-    protected void printId() {
-        printAttribute("id", getId());
+    protected void printAttribute(String key, String value) {
+        print(" " + key + "=\"" + value + "\" ");
     }
 
-    protected void printName() {
-        printAttribute("name", getName());
+    protected void printIdIfNotBlank() {
+        printAttributeIfNotBlank("id", getId());
     }
 
-    protected void printCssClass() {
-        printAttribute("class", getCssClass());
+    protected void printNameIfNotBlank() {
+        printAttributeIfNotBlank("name", getName());
+    }
+
+    protected void printCssClassIfNotBlank() {
+        printAttributeIfNotBlank("class", getCssClass());
+    }
+
+    protected void printValueIfNotBlank() {
+        printAttributeIfNotBlank("value", getEscapedValue());
     }
 
     protected void printValue() {
-        printAttribute("value", getEscapedValue());
+        printAttributeIfNotBlank("value", getEscapedValue());
     }
-
 }

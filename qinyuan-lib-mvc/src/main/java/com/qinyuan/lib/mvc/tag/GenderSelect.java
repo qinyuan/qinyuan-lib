@@ -15,8 +15,8 @@ public class GenderSelect extends Select {
     @Override
     public int doEndTag() throws JspException {
         print("<select");
-        printId();
-        printName();
+        printIdIfNotBlank();
+        printNameIfNotBlank();
         print(">");
 
         List<String> options = Lists.newArrayList("男", "女");

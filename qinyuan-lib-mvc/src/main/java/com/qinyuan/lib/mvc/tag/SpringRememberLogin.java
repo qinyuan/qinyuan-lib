@@ -10,7 +10,7 @@ public class SpringRememberLogin extends MyTagSupport {
     @Override
     public int doEndTag() throws JspException {
         print("<input type=\"checkbox\" name=\"_spring_security_remember_me\"");
-        printId();
+        printIdIfNotBlank();
         print("/> ");
         return EVAL_PAGE;
     }
