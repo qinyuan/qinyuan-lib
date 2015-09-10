@@ -1,6 +1,7 @@
 package com.qinyuan.lib.database.hibernate;
 
 import com.qinyuan.lib.lang.IntegerUtils;
+import com.qinyuan.lib.lang.file.ClasspathFileUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,6 +21,7 @@ public class HibernateUtils {
     private final static Logger LOGGER = LoggerFactory.getLogger(HibernateUtils.class);
 
     public final static String CONFIG_FILE = "hibernate.cfg.xml";
+    public final static String TEST_CONFIG_FILE = "hibernate.test.cfg.xml";
     private final static SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
@@ -35,7 +37,11 @@ public class HibernateUtils {
     }
 
     static Configuration getConfiguration() {
-        return new Configuration().configure(CONFIG_FILE);
+        if (ClasspathFileUtils.getFile(TEST_CONFIG_FILE).isFile()) {
+            return new Configuration().configure(TEST_CONFIG_FILE); // load test config file first
+        } else {
+            return new Configuration().configure(CONFIG_FILE);
+        }
     }
 
     public static Session getSession() {
