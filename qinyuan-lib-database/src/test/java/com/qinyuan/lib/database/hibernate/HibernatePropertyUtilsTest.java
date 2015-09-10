@@ -21,7 +21,7 @@ public class HibernatePropertyUtilsTest {
 
     @Test
     public void testGetUrl() {
-        assertThat(HibernatePropertyUtils.getUrl()).isEqualTo("jdbc:mysql://localhost:3306/crawler");
+        assertThat(HibernatePropertyUtils.getUrl()).isEqualTo("jdbc:mysql://localhost:3306/test");
     }
 
     @Test
@@ -31,6 +31,11 @@ public class HibernatePropertyUtilsTest {
 
     @Test
     public void testGetDatabase() {
-        assertThat(HibernatePropertyUtils.getDatabase()).isEqualTo("crawler");
+        assertThat(HibernatePropertyUtils.getDatabase()).isEqualTo("test");
+    }
+
+    @Test
+    public void testGetDriver() {
+        assertThat(HibernatePropertyUtils.getDriver()).isEqualTo("com.mysql.jdbc.Driver");
     }
 }

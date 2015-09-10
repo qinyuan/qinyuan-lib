@@ -23,6 +23,10 @@ public class HibernatePropertyUtils {
         return properties.getProperty("connection.url");
     }
 
+    public static String getDriver() {
+        return properties.getProperty("connection.driver_class");
+    }
+
     private final static Pattern hostPattern = Pattern.compile("(?<=jdbc:mysql://)[^:]+");
 
     public static String getHost() {
