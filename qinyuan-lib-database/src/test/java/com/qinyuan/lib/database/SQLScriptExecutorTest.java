@@ -1,5 +1,6 @@
-package com.qinyuan.lib.database.hibernate;
+package com.qinyuan.lib.database;
 
+import com.qinyuan.lib.database.SQLScriptExecutor;
 import com.qinyuan.lib.lang.test.TestFileUtils;
 import org.junit.Test;
 

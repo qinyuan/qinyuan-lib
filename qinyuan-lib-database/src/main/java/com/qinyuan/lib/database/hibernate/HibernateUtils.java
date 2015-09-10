@@ -119,6 +119,20 @@ public class HibernateUtils {
         }
     }
 
+    public static void executeSQLUpdate(String... sqls) {
+        Session session = HibernateUtils.getSession();
+        try {
+            for (String sql : sqls) {
+                session.createSQLQuery(sql).executeUpdate();
+            }
+        } catch (Throwable e) {
+            LOGGER.error("fail to execute update: {}", e);
+            throw e;
+        } finally {
+            commit(session);  // ensure session is closed
+        }
+    }
+
     public static <T> T get(Class<T> clazz, Integer id) {
         if (id == null) {
             return null;
