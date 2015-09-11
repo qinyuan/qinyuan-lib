@@ -9,24 +9,22 @@ public class AbstractDao<T> {
         return GenericUtils.getRealTypeOfGenericArgument(this.getClass());
     }
 
-    @SuppressWarnings("unchecked")
     public List<T> getInstances() {
-        return new HibernateListBuilder().build(getPersistClass());
+        return getInstances(-1, -1);
     }
 
-    @SuppressWarnings("unchecked")
     public int count() {
-        return new HibernateListBuilder().count(getPersistClass());
+        return getListBuilder().count(getPersistClass());
     }
 
     @SuppressWarnings("unchecked")
     public List<T> getInstances(int firstResult, int maxResults) {
-        return new HibernateListBuilder().limit(firstResult, maxResults).build(getPersistClass());
+        return getListBuilder().limit(firstResult, maxResults).build(getPersistClass());
     }
 
     @SuppressWarnings("unchecked")
     public T getFirstInstance() {
-        return (T) new HibernateListBuilder().getFirstItem(getPersistClass());
+        return (T) getListBuilder().getFirstItem(getPersistClass());
     }
 
     @SuppressWarnings("unchecked")
@@ -36,5 +34,9 @@ public class AbstractDao<T> {
 
     public void delete(Integer id) {
         HibernateDeleter.deleteById(getPersistClass(), id);
+    }
+
+    protected HibernateListBuilder getListBuilder() {
+        return new HibernateListBuilder();
     }
 }
