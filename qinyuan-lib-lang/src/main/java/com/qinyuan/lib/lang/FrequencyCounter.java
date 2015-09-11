@@ -8,8 +8,22 @@ import java.util.*;
  */
 public class FrequencyCounter {
     private final Map<Object, Integer> counter = new HashMap<>();
+    private final HashSet<Object> excludeValues = new HashSet<>();
+
+    /**
+     * add the value that not to count
+     *
+     * @param excludeValue value that not to count
+     */
+    public synchronized void addExclude(Object excludeValue) {
+        excludeValues.add(excludeValue);
+    }
 
     public synchronized void add(Object value) {
+        if (excludeValues.contains(value)) {
+            return;
+        }
+
         if (counter.containsKey(value)) {
             counter.put(value, counter.get(value) + 1);
         } else {

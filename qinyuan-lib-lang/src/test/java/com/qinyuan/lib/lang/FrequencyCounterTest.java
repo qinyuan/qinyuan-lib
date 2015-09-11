@@ -24,5 +24,17 @@ public class FrequencyCounterTest {
         assertThat(counter.top(3)).containsExactly("2", "3", "1");
         assertThat(counter.top(4)).containsExactly("2", "3", "1", "4");
         assertThat(counter.top(5)).containsExactly("2", "3", "1", "4");
+
+        // test exclude value
+        counter = new FrequencyCounter();
+        counter.addExclude(5);
+        counter.add(2);
+        counter.add(2);
+        counter.add(3);
+        counter.add(5);
+        counter.add(5);
+        assertThat(counter.top(1)).containsExactly(2);
+        assertThat(counter.top(2)).containsExactly(2, 3);
+        assertThat(counter.top(3)).containsExactly(2, 3);
     }
 }
