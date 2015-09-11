@@ -1,5 +1,6 @@
 package com.qinyuan.lib.database;
 
+import com.qinyuan.lib.database.test.DatabaseInitializer;
 import com.qinyuan.lib.lang.test.TestFileUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;

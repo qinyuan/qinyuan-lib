@@ -44,6 +44,12 @@
             <groupId>com.mchange</groupId>
             <artifactId>mchange-commons-java</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

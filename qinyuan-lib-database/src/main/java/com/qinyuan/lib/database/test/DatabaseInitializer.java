@@ -1,5 +1,6 @@
-package com.qinyuan.lib.database;
+package com.qinyuan.lib.database.test;
 
+import com.qinyuan.lib.database.SQLScriptExecutor;
 import com.qinyuan.lib.database.hibernate.HibernatePropertyUtils;
 import com.qinyuan.lib.database.hibernate.HibernateUtils;
 import com.qinyuan.lib.lang.file.ClasspathFileUtils;

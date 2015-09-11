@@ -1,6 +1,7 @@
-package com.qinyuan.lib.database;
+package com.qinyuan.lib.database.test;
 
 import com.qinyuan.lib.database.hibernate.HibernateListBuilder;
+import com.qinyuan.lib.database.test.DatabaseInitializer;
 import com.qinyuan.lib.lang.test.TestFileUtils;
 import org.junit.Test;
 
