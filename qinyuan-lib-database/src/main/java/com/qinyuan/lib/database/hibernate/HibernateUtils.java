@@ -37,7 +37,7 @@ public class HibernateUtils {
     }
 
     static Configuration getConfiguration() {
-        if (ClasspathFileUtils.getFile(TEST_CONFIG_FILE).isFile()) {
+        if (ClasspathFileUtils.isFile(TEST_CONFIG_FILE)) {
             return new Configuration().configure(TEST_CONFIG_FILE); // load test config file first
         } else {
             return new Configuration().configure(CONFIG_FILE);

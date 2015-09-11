@@ -35,4 +35,9 @@ public class ClasspathFileUtils {
             throw new RuntimeException(e);
         }
     }
+
+    public static boolean isFile(String relativePath) {
+        File file = getFile(relativePath);
+        return file != null && file.isFile();
+    }
 }
