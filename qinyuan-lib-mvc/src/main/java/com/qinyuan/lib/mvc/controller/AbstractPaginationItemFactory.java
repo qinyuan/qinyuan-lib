@@ -11,11 +11,14 @@ public abstract class AbstractPaginationItemFactory<T> implements PaginationItem
         return getListBuilder().count(GenericUtils.getRealTypeOfGenericArgument(this.getClass()));
     }
 
+    protected final Class getPersistClass() {
+        return GenericUtils.getRealTypeOfGenericArgument(this.getClass());
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public List<T> getInstances(int firstResult, int maxResults) {
-        return (List) getListBuilder().limit(firstResult, maxResults).build(
-                GenericUtils.getRealTypeOfGenericArgument(this.getClass()));
+        return (List) getListBuilder().limit(firstResult, maxResults).build(getPersistClass());
     }
 
     public List<T> getInstances() {

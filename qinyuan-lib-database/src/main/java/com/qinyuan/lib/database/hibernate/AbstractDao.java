@@ -5,7 +5,7 @@ import com.qinyuan.lib.lang.reflect.GenericUtils;
 import java.util.List;
 
 public class AbstractDao<T> {
-    protected Class getPersistClass() {
+    protected final Class getPersistClass() {
         return GenericUtils.getRealTypeOfGenericArgument(this.getClass());
     }
 
