@@ -5,11 +5,13 @@ import com.qinyuan.lib.database.hibernate.HibernateUtils;
 import com.qinyuan.lib.lang.DateUtils;
 import com.qinyuan.lib.lang.IntegerUtils;
 import com.qinyuan.lib.network.ip.DefaultIpLocationQuerier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class LoginRecordDao {
-
+    private final static Logger LOGGER = LoggerFactory.getLogger(LoginRecordDao.class);
 
     public List<LoginRecord> getInstances() {
         return new HibernateListBuilder().build(LoginRecord.class);
@@ -63,6 +65,11 @@ public class LoginRecordDao {
     }
 
     public Integer add(Integer userId, String ip) {
-        return add(userId, ip, new DefaultIpLocationQuerier().getLocation(ip), DateUtils.nowString());
+        String location = new DefaultIpLocationQuerier().getLocation(ip);
+        if (location == null) {
+            LOGGER.error("Fail to query location of ip {}, userId: {}", ip, userId);
+            return null;
+        }
+        return add(userId, ip, location, DateUtils.nowString());
     }
 }
