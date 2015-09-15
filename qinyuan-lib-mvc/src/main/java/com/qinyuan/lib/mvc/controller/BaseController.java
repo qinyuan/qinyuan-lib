@@ -48,6 +48,10 @@ public class BaseController {
         return request.getLocalAddr();
     }
 
+    protected String getLocalHost() {
+        return request.getServerName();
+    }
+
     protected String getParameter(String name) {
         return request.getParameter(name);
     }

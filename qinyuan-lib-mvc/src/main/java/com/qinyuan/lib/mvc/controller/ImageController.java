@@ -45,7 +45,7 @@ public class ImageController extends BaseController {
              * If upload file is empty, deal with image url
              */
             if (isLocalUrl(imageUrl)) {
-                return new ImageUrlAdapter(imageConfig, getLocalAddress()).urlToPath(imageUrl);
+                return new ImageUrlAdapter(imageConfig, getLocalHost()).urlToPath(imageUrl);
             } else {
                 String filePath = replaceBuildInString(getImageDownloader().save(imageUrl));
                 LOGGER.info("save upload image to {}", filePath);
@@ -107,11 +107,11 @@ public class ImageController extends BaseController {
     }
 
     public String pathToUrl(String path) {
-        return new ImageUrlAdapter(imageConfig, getLocalAddress()).pathToUrl(path);
+        return new ImageUrlAdapter(imageConfig, getLocalHost()).pathToUrl(path);
     }
 
     private boolean isLocalUrl(String url) {
-        return url.contains("://" + getLocalAddress());
+        return url.contains("://" + getLocalHost()) || url.contains("://" + getLocalAddress());
     }
 
     protected String getSavePath(String imageUrl, MultipartFile imageFile) throws IOException {
