@@ -2,6 +2,8 @@ package com.qinyuan.lib.mvc.controller;
 
 import com.qinyuan.lib.config.ImageConfig;
 import com.qinyuan.lib.image.ImageDownloader;
+import com.qinyuan.lib.image.ThumbnailSuffix;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +39,7 @@ public class ImageController extends BaseController {
             /*
              * deal with upload file if it's not empty
              */
-            return transferUploadFile(imageFile, savePathPrefix);
+            return replaceBuildInString(transferUploadFile(imageFile, savePathPrefix));
         } else {
             /*
              * If upload file is empty, deal with image url
@@ -45,7 +47,7 @@ public class ImageController extends BaseController {
             if (isLocalUrl(imageUrl)) {
                 return new ImageUrlAdapter(imageConfig, getLocalAddress()).urlToPath(imageUrl);
             } else {
-                String filePath = getImageDownloader().save(imageUrl);
+                String filePath = replaceBuildInString(getImageDownloader().save(imageUrl));
                 LOGGER.info("save upload image to {}", filePath);
                 return filePath;
             }
@@ -85,6 +87,23 @@ public class ImageController extends BaseController {
         uploadFile.transferTo(file);
         LOGGER.info("save upload image to {}", filePath);
         return filePath;
+    }
+
+    private String replaceBuildInString(String path) throws IOException {
+        if (!StringUtils.hasText(path)) {
+            return path;
+        }
+
+        String oldPath = path;
+        for (String suffix : ThumbnailSuffix.getDefaultSuffixes()) {
+            if (path.contains(suffix)) {
+                path = path.replace(suffix, RandomStringUtils.random(suffix.length()));
+            }
+        }
+        if (!path.equals(oldPath)) {
+            FileUtils.moveFile(new File(oldPath), new File(path));
+        }
+        return path;
     }
 
     public String pathToUrl(String path) {
