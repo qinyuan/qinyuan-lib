@@ -29,6 +29,21 @@ public class ThumbnailBuilder {
         return buildThumbnail(imagePath, path, size);
     }
 
+    public String get(String imagePath, String suffix, ImageSize size) {
+        String path = getPath(imagePath, suffix);
+        return new File(path).isFile() ? path : build(imagePath, suffix, size);
+    }
+
+    public String getSmall(String imagePath) {
+        String path = getPath(imagePath, ThumbnailSuffix.SMALL);
+        return new File(path).isFile() ? path : buildSmall(imagePath);
+    }
+
+    public String getMiddle(String imagePath) {
+        String path = getPath(imagePath, ThumbnailSuffix.MIDDLE);
+        return new File(path).isFile() ? path : buildMiddle(imagePath);
+    }
+
     private String buildThumbnail(String imagePath, String targetPath, ImageSize size) {
         if (new File(imagePath).isFile()) {
             try {
@@ -39,24 +54,6 @@ public class ThumbnailBuilder {
             }
         }
         return targetPath;
-    }
-
-    public String getSmall(String imagePath) {
-        String path = getPath(imagePath, ThumbnailSuffix.SMALL);
-        if (new File(path).isFile()) {
-            return path;
-        } else {
-            return buildSmall(imagePath);
-        }
-    }
-
-    public String getMiddle(String imagePath) {
-        String path = getPath(imagePath, ThumbnailSuffix.MIDDLE);
-        if (new File(path).isFile()) {
-            return path;
-        } else {
-            return buildMiddle(imagePath);
-        }
     }
 
     private String getPath(String imagePath, String suffix) {
