@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Class to delete redundant images
@@ -13,11 +14,16 @@ public class RedundantImageCleaner {
     private final static Logger LOGGER = LoggerFactory.getLogger(RedundantImageCleaner.class);
 
     private String baseDir;
+    private List<String> excludeDirs;
     private RedundantImageValidator redundantImageValidator;
     private boolean debugMode;
 
     public void setBaseDir(String baseDir) {
         this.baseDir = baseDir;
+    }
+
+    public void setExcludeDirs(List<String> excludeDirs) {
+        this.excludeDirs = excludeDirs;
     }
 
     public void setDebugMode(boolean debugMode) {
@@ -51,6 +57,10 @@ public class RedundantImageCleaner {
         File[] subFiles = dir.listFiles();
         if (subFiles != null) {
             for (File file : subFiles) {
+                if (isExcluded(file)) {
+                    continue;
+                }
+
                 if (file.isDirectory()) {
                     this.cleanDirectory(file);
                 } else {
@@ -60,6 +70,21 @@ public class RedundantImageCleaner {
                 }
             }
         }
+    }
+
+    private boolean isExcluded(File file) {
+        if (excludeDirs == null || excludeDirs.size() == 0) {
+            return false;
+        }
+
+        String path = file.getAbsolutePath();
+        for (String dir : excludeDirs) {
+            String parent = new File(baseDir + "/" + dir).getAbsolutePath();
+            if (path.startsWith(parent)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void cleanFile(File file) {
