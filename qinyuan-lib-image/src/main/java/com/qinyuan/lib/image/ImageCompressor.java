@@ -31,12 +31,20 @@ public class ImageCompressor {
     }
 
     public void compress(String targetPath, double rate) {
+        if (rate > 1.0) {
+            rate = 1.0;
+        }
         int width = (int) (getWidth() * rate);
         int height = (int) (getHeight() * rate);
-        compress(targetPath, width, height);
+        compressByProportionalSize(targetPath, width, height);
     }
 
     public void compress(String targetPath, int width, int height) {
+        double rate = Math.min(((double) width) / getWidth(), ((double) height) / getHeight());
+        compress(targetPath, rate);
+    }
+
+    private void compressByProportionalSize(String targetPath, int width, int height) {
         if (width > getWidth()) {
             width = getWidth();
         }
