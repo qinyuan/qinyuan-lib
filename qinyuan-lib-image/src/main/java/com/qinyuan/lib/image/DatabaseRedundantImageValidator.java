@@ -16,7 +16,7 @@ import java.util.List;
 public class DatabaseRedundantImageValidator implements RedundantImageValidator {
     private final static Logger LOGGER = LoggerFactory.getLogger(DatabaseRedundantImageValidator.class);
     private List<ImageColumn> columns;
-    private List<String> thumbnailSuffixes = ThumbnailSuffix.getSuffixes();
+    private List<String> thumbnailSuffixes = ThumbnailSuffix.getDefaultSuffixes();
 
     public void setColumns(List<String> tableColumns) {
         this.columns = new ArrayList<>();
@@ -28,6 +28,10 @@ public class DatabaseRedundantImageValidator implements RedundantImageValidator 
                 LOGGER.info("Add {} as validation column.", tableColumn);
             }
         }
+    }
+
+    public void setThumbnailSuffixes(List<String> thumbnailSuffixes) {
+        this.thumbnailSuffixes = thumbnailSuffixes;
     }
 
     @Override

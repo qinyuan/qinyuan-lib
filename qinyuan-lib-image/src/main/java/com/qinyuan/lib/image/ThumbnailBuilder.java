@@ -1,5 +1,6 @@
 package com.qinyuan.lib.image;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,13 +14,19 @@ public class ThumbnailBuilder {
     private final static Logger LOGGER = LoggerFactory.getLogger(ThumbnailBuilder.class);
 
     public String buildSmall(String imagePath) {
-        String path = getPath(imagePath, ThumbnailSuffix.SMALL_SUFFIX);
-        return buildThumbnail(imagePath, path, ImageSize.SMALL);
+        return build(imagePath, ThumbnailSuffix.SMALL, ImageSize.SMALL);
     }
 
     public String buildMiddle(String imagePath) {
-        String path = getPath(imagePath, ThumbnailSuffix.MIDDLE_SUFFIX);
-        return buildThumbnail(imagePath, path, ImageSize.MIDDLE);
+        return build(imagePath, ThumbnailSuffix.MIDDLE, ImageSize.MIDDLE);
+    }
+
+    public String build(String imagePath, String suffix, ImageSize size) {
+        if (!StringUtils.isBlank(suffix)) {
+            throw new IllegalArgumentException("suffix can't be blank");
+        }
+        String path = getPath(imagePath, suffix);
+        return buildThumbnail(imagePath, path, size);
     }
 
     private String buildThumbnail(String imagePath, String targetPath, ImageSize size) {
@@ -35,7 +42,7 @@ public class ThumbnailBuilder {
     }
 
     public String getSmall(String imagePath) {
-        String path = getPath(imagePath, ThumbnailSuffix.SMALL_SUFFIX);
+        String path = getPath(imagePath, ThumbnailSuffix.SMALL);
         if (new File(path).isFile()) {
             return path;
         } else {
@@ -44,7 +51,7 @@ public class ThumbnailBuilder {
     }
 
     public String getMiddle(String imagePath) {
-        String path = getPath(imagePath, ThumbnailSuffix.MIDDLE_SUFFIX);
+        String path = getPath(imagePath, ThumbnailSuffix.MIDDLE);
         if (new File(path).isFile()) {
             return path;
         } else {

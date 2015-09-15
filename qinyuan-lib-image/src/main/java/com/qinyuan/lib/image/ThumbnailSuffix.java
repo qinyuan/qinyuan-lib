@@ -13,15 +13,17 @@ public class ThumbnailSuffix {
     private ThumbnailSuffix() {
     }
 
-    private static List<String> suffixes = Lists.newArrayList(
+    private static List<String> DEFAULT_SUFFIXES = Lists.newArrayList(
             "_thumbnail_small",
-            "_thumbnail_middle"
+            "_thumbnail_middle",
+            "_thumbnail_large"
     );
 
-    public final static String SMALL_SUFFIX = suffixes.get(0);
-    public final static String MIDDLE_SUFFIX = suffixes.get(1);
+    public final static String SMALL = DEFAULT_SUFFIXES.get(0);
+    public final static String MIDDLE = DEFAULT_SUFFIXES.get(1);
+    public final static String LARGE = DEFAULT_SUFFIXES.get(2);
 
-    public static List<String> getSuffixes() {
-        return new ArrayList<>(suffixes);
+    public static List<String> getDefaultSuffixes() {
+        return new ArrayList<>(DEFAULT_SUFFIXES);
     }
 }
