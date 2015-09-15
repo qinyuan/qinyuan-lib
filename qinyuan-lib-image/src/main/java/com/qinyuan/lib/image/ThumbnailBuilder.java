@@ -22,7 +22,7 @@ public class ThumbnailBuilder {
     }
 
     public String build(String imagePath, String suffix, ImageSize size) {
-        if (!StringUtils.isBlank(suffix)) {
+        if (StringUtils.isBlank(suffix)) {
             throw new IllegalArgumentException("suffix can't be blank");
         }
         String path = getPath(imagePath, suffix);
