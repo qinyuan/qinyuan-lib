@@ -67,7 +67,7 @@ public class LoginRecordDao {
     public Integer add(Integer userId, String ip) {
         String location = new DefaultIpLocationQuerier().getLocation(ip);
         if (location == null) {
-            LOGGER.error("Fail to query location of ip {}, userId: {}", ip, userId);
+            LOGGER.warn("Fail to query location of ip {}, userId: {}", ip, userId);
             return null;
         }
         return add(userId, ip, location, DateUtils.nowString());

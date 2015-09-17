@@ -10,6 +10,6 @@ public class MailSenderBuilder {
     }
 
     public MailSender build(String host, String username, String password) {
-        return new SimpleMailSender(host, username, password);
+        return new ReplaceSensitiveCharMailSender(host, username, password);
     }
 }
