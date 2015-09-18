@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -80,11 +81,30 @@ public class DateUtils {
         return dateFormat.format(date);
     }
 
+    /**
+     * build date string by year, month and day.
+     * for example, buildDateString(2015, 1, 3) will return 2015-01-03
+     *
+     * @param year  year of date, from 1900 to 2100
+     * @param month month part of date, from 1 to 12
+     * @param day   day part of date, from 1 to 31
+     * @return date string
+     */
+    public static String buildDateString(Integer year, Integer month, Integer day) {
+        if (!IntegerUtils.isPositive(year) || !IntegerUtils.isPositive(month)
+                || !IntegerUtils.isPositive(day)) {
+            return null;
+        }
+
+        return new DecimalFormat("0000").format(year) + "-" + new DecimalFormat("00").format(month)
+                + "-" + new DecimalFormat("00").format(day);
+    }
+
     public static int currentHour() {
         return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
     }
 
-    public static int currentYear(){
+    public static int currentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
 

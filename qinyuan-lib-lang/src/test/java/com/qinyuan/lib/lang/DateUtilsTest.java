@@ -12,6 +12,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by qinyuan on 15-1-11.
  */
 public class DateUtilsTest {
+
+    @Test
+    public void testBuildDateString() {
+        assertThat(DateUtils.buildDateString(2015, 1, 1)).isEqualTo("2015-01-01");
+        assertThat(DateUtils.buildDateString(2015, 0, 1)).isNull();
+        assertThat(DateUtils.buildDateString(0, 1, 1)).isNull();
+        assertThat(DateUtils.buildDateString(null, 1, 1)).isNull();
+    }
+
     @Test
     public void testNewDate() throws Exception {
         long milliSecondsOfOneDay = 3600 * 24 * 1000;
