@@ -35,6 +35,12 @@ public class HibernateUpdater {
         return this;
     }
 
+    /**
+     * method to execute update
+     *
+     * @param clazz     class to update
+     * @param setClause such as 'username=:username,password=:password' and so on
+     */
     public void update(Class<?> clazz, String setClause) {
         Session session = HibernateUtils.getSession();
         String hql = "UPDATE " + clazz.getSimpleName() + " SET " + setClause
