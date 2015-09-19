@@ -132,6 +132,16 @@ public class DateUtilsTest {
     }
 
     @Test
+    public void testOneYearLater() {
+        System.out.println(DateUtils.toLongString(DateUtils.oneYearLater()));
+    }
+
+    @Test
+    public void testOneDayLater() {
+        System.out.println(DateUtils.toLongString(DateUtils.oneDayLater()));
+    }
+
+    @Test
     public void testGetDatePart() throws Exception {
         assertThat(DateUtils.getDatePart("2012-12-12 10:10:10")).isEqualTo("2012-12-12");
     }

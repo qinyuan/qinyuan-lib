@@ -188,6 +188,12 @@ public class DateUtils {
         return new Date(System.currentTimeMillis() + SECONDS_OF_ONE_DAY * 1000);
     }
 
+    public static Date oneYearLater() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, 1);
+        return new Date(cal.getTimeInMillis());
+    }
+
     /**
      * Delete the  milli second part of date
      * <p>
