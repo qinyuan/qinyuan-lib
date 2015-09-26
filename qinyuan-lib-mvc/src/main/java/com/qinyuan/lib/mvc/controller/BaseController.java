@@ -73,6 +73,10 @@ public class BaseController {
         return NumberUtils.isNumber(value) ? Integer.parseInt(value) : null;
     }
 
+    protected String getUserAgent() {
+        return request.getHeader("user-Agent");
+    }
+
     protected void setTitle(Object title) {
         request.setAttribute("title", title);
     }
