@@ -73,8 +73,20 @@ public class BaseController {
         return NumberUtils.isNumber(value) ? Integer.parseInt(value) : null;
     }
 
-    protected String getUserAgentString() {
+    protected String getUserAgent() {
         return request.getHeader("user-Agent");
+    }
+
+    protected UserAgent.OS getUserAgentOS() {
+        return getUserAgentObject().getOS();
+    }
+
+    protected UserAgent.Browser getUserAgentBrowser() {
+        return getUserAgentObject().getBrowser();
+    }
+
+    private UserAgent getUserAgentObject() {
+        return new UserAgent(getUserAgent());
     }
 
     protected void setTitle(Object title) {
