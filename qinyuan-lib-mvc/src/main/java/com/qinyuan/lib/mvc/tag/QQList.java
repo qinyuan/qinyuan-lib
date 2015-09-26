@@ -1,5 +1,7 @@
 package com.qinyuan.lib.mvc.tag;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.servlet.jsp.JspException;
 
 /**
@@ -10,6 +12,7 @@ public class QQList extends MyTagSupport {
     private final static String ACTION = "http://list.qq.com/cgi-bin/qf_compose_send";
     private boolean showInput;
     private String nId;
+    private String email;
 
     public void setShowInput(boolean showInput) {
         this.showInput = showInput;
@@ -17,6 +20,10 @@ public class QQList extends MyTagSupport {
 
     public void setnId(String nId) {
         this.nId = nId;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -28,11 +35,17 @@ public class QQList extends MyTagSupport {
 
         print("<input type=\"hidden\" name=\"t\" value=\"qf_booked_feedback\">");
         print("<input type=\"hidden\" name=\"id\" value=\"" + nId + "\">");
+
+        print("<input name=\"to\" ");
         if (showInput) {
-            print("<input type=\"text\" name=\"to\" class=\"form-control\">");
+            print("type=\"text\" class=\"form-control\"");
         } else {
-            print("<input type=\"hidden\" name=\"to\">");
+            print("type=\"hidden\"");
         }
+        if (StringUtils.isNotBlank(email)) {
+            print(" value=\"" + email + "\"");
+        }
+        print(">");
 
         return EVAL_PAGE;
     }
