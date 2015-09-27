@@ -74,7 +74,7 @@ public class BaseController {
     }
 
     protected String getUserAgent() {
-        return request.getHeader("user-Agent");
+        return UserAgent.parse(request);
     }
 
     protected UserAgent.OS getUserAgentOS() {

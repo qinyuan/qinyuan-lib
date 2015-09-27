@@ -1,11 +1,17 @@
 package com.qinyuan.lib.mvc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class UserAgent {
 
     private final String userAgentString;
 
     public UserAgent(String userAgentString) {
         this.userAgentString = userAgentString;
+    }
+
+    public UserAgent(HttpServletRequest request) {
+        this(parse(request));
     }
 
     public OS getOS() {
@@ -38,12 +44,15 @@ public class UserAgent {
         }
     }
 
-
     public static enum OS {
         LINUX, WINDOWS, ANDROID, IOS, OTHER
     }
 
     public static enum Browser {
         FIREFOX, CHROME, OPERA, SAFARI, IE, OTHER
+    }
+
+    public static String parse(HttpServletRequest request) {
+        return request.getHeader("user-Agent");
     }
 }
