@@ -55,21 +55,22 @@ public class LoginRecordDao {
         return new Factory();
     }
 
-    private Integer add(Integer userId, String ip, String location, String loginTime) {
+    private Integer add(Integer userId, String ip, String location, String loginTime, String platform) {
         LoginRecord loginRecord = new LoginRecord();
         loginRecord.setUserId(userId);
         loginRecord.setLoginTime(loginTime);
         loginRecord.setIp(ip);
         loginRecord.setLocation(location);
+        loginRecord.setPlatform(platform);
         return HibernateUtils.save(loginRecord);
     }
 
-    public Integer add(Integer userId, String ip) {
+    public Integer add(Integer userId, String ip, String platform) {
         String location = new DefaultIpLocationQuerier().getLocation(ip);
         if (location == null) {
             LOGGER.warn("Fail to query location of ip {}, userId: {}", ip, userId);
             return null;
         }
-        return add(userId, ip, location, DateUtils.nowString());
+        return add(userId, ip, location, DateUtils.nowString(), platform);
     }
 }

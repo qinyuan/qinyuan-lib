@@ -8,6 +8,7 @@ public class LoginRecord extends PersistObject {
     private String loginTime;
     private String ip;
     private String location;
+    private String platform;
 
     public Integer getUserId() {
         return userId;
@@ -25,6 +26,10 @@ public class LoginRecord extends PersistObject {
         return location;
     }
 
+    public String getPlatform() {
+        return platform;
+    }
+
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
@@ -39,5 +44,9 @@ public class LoginRecord extends PersistObject {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 }

@@ -12,5 +12,6 @@
         <property name="loginTime" column="login_time"/>
         <property name="ip"/>
         <property name="location"/>
+        <property name="platform"/>
     </class>
 </hibernate-mapping>
