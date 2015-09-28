@@ -50,13 +50,13 @@ public class DateUtilsTest {
     }
 
     @Test
-    public void testGetCurrentHour() {
+    public void testCurrentHour() {
         assertThat(DateUtils.currentHour()).isEqualTo(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
     }
 
     @Test
-    public void dtestGetCurrentYear() {
-        System.out.println(DateUtils.currentYear());
+    public void testCurrentYear() {
+        assertThat(DateUtils.currentYear()).isEqualTo(Calendar.getInstance().get(Calendar.YEAR));
     }
 
     @Test
@@ -80,6 +80,7 @@ public class DateUtilsTest {
     @Test
     public void testThreeDayAgo() {
         Date date = DateUtils.threeDaysAgo();
+        System.out.println(DateUtils.toLongString(date));
         assertThat(System.currentTimeMillis() - 1000L * 3600 * 24 * 3 - date.getTime())
                 .isLessThan(50).isGreaterThan(-50);
     }

@@ -86,7 +86,7 @@ public class BaseController {
     }
 
     private UserAgent getUserAgentObject() {
-        return new UserAgent(getUserAgent());
+        return new UserAgent(request);
     }
 
     protected void setTitle(Object title) {
