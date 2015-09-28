@@ -19,10 +19,21 @@ public class TimeUtils {
     }
 
     private static int getTotalSecond(Time t) {
-        return t.hour * 3600 + t.minute * 60 + t.second;
+        return t.getHour() * 3600 + t.getMinute() * 60 + t.getSecond();
     }
 
-    public static boolean isCrossed(TimePeriod p1, TimePeriod p2) {
-        return TimeUtils.getSecondDiff(p1.start, p2.end) * TimeUtils.getSecondDiff(p1.end, p2.start) < 0;
+    public static boolean isIntersected(TimePeriod p1, TimePeriod p2) {
+        return (p1 != null && p2 != null) &&
+                TimeUtils.getSecondDiff(p1.start, p2.end) * TimeUtils.getSecondDiff(p1.end, p2.start) < 0;
+    }
+
+    public static TimePeriod intersect(TimePeriod p1, TimePeriod p2) {
+        if (p1 == null || p2 == null || (!isIntersected(p1, p2))) {
+            return null;
+        }
+
+        Time start = p1.start.isLaterThan(p2.start) ? p1.start : p2.start;
+        Time end = p1.end.isEarlierThan(p2.end) ? p1.end : p2.end;
+        return new TimePeriod(start, end);
     }
 }

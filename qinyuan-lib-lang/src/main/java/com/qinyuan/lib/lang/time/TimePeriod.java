@@ -5,8 +5,12 @@ public class TimePeriod {
     public final Time end;
 
     public TimePeriod(Time start, Time end) {
-        if (TimeUtils.getSecondDiff(start, end) < 0) {
-            throw new RuntimeException("start time shouldn't be later than end time");
+        if (start == null) {
+            throw new IllegalArgumentException("start is null");
+        } else if (end == null) {
+            throw new IllegalArgumentException("end is null");
+        } else if (TimeUtils.getSecondDiff(start, end) < 0) {
+            throw new IllegalArgumentException("start time shouldn't be later than end time");
         }
 
         this.start = start;
@@ -18,5 +22,10 @@ public class TimePeriod {
      */
     public int getSeconds() {
         return TimeUtils.getSecondDiff(start, end);
+    }
+
+    @Override
+    public String toString() {
+        return start.toString() + "~" + end.toString();
     }
 }
