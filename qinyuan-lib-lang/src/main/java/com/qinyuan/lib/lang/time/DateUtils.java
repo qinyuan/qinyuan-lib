@@ -1,5 +1,6 @@
-package com.qinyuan.lib.lang;
+package com.qinyuan.lib.lang.time;
 
+import com.qinyuan.lib.lang.IntegerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -133,7 +134,7 @@ public class DateUtils {
         return date != null && date.matches("^" + DATE_PATTERN + "$");
     }
 
-    private final static String DATE_TIME_PATTERN = DATE_PATTERN + " \\d{1,2}:\\d{1,2}:\\d{1,2}";
+    private final static String DATE_TIME_PATTERN = DATE_PATTERN + " " + TimeUtils.TIME_PATTERN;
 
     public static boolean isDateTime(String dateTime) {
         return dateTime != null && dateTime.matches("^" + DATE_TIME_PATTERN + "$");

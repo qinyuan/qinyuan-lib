@@ -2,7 +2,7 @@ package com.qinyuan.lib.mvc.controller;
 
 import com.google.common.base.Joiner;
 import com.qinyuan.lib.database.hibernate.HibernateListBuilder;
-import com.qinyuan.lib.lang.DateUtils;
+import com.qinyuan.lib.lang.time.DateUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.util.StringUtils;

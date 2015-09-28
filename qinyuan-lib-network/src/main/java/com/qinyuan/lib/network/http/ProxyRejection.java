@@ -1,7 +1,7 @@
 package com.qinyuan.lib.network.http;
 
 import com.qinyuan.lib.database.hibernate.PersistObject;
-import com.qinyuan.lib.lang.DateUtils;
+import com.qinyuan.lib.lang.time.DateUtils;
 
 /**
  * Class to record proxy rejection information

@@ -1,6 +1,6 @@
 package com.qinyuan.lib.mvc.tag;
 
-import com.qinyuan.lib.lang.DateUtils;
+import com.qinyuan.lib.lang.time.DateUtils;
 
 public class BirthdaySelect extends DateSelect {
     public BirthdaySelect(){

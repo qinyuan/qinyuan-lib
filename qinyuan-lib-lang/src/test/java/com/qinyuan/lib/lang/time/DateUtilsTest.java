@@ -1,5 +1,6 @@
-package com.qinyuan.lib.lang;
+package com.qinyuan.lib.lang.time;
 
+import com.qinyuan.lib.lang.time.DateUtils;
 import org.junit.Test;
 
 import java.sql.Date;
