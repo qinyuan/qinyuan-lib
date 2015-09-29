@@ -53,7 +53,7 @@ public class WeightedTime {
         return this;
     }
 
-    public int countSeconds() {
+    public long countSeconds() {
         if (startTime.getTime() > endTime.getTime()) {
             return 0;
         }
@@ -63,7 +63,7 @@ public class WeightedTime {
             return getWeightedSecondsInOneDay(new Time(startTime), new Time(endTime));
         }
 
-        int seconds = 0;
+        long seconds = 0;
 
         // calculate weighted seconds of whole day
         int wholeDayCount = DateUtils.getDayDiff(startTime, endTime) - 1;
@@ -84,8 +84,8 @@ public class WeightedTime {
         return DateUtils.getDayDiff(startDate, endDate);
     }
 
-    private int getWeightedSecondsOfOneDay() {
-        int seconds = 3600 * 24; // seconds of one day
+    private long getWeightedSecondsOfOneDay() {
+        long seconds = 3600 * 24; // seconds of one day
 
         for (Pair<TimePeriod, Integer> weight : weights) {
             int secondsInPeriod = weight.getLeft().getSeconds();
@@ -95,9 +95,9 @@ public class WeightedTime {
         return seconds;
     }
 
-    private int getWeightedSecondsInOneDay(Time start, Time end) {
+    private long getWeightedSecondsInOneDay(Time start, Time end) {
         TimePeriod fullPeriod = new TimePeriod(start, end);
-        int seconds = fullPeriod.getSeconds();
+        long seconds = fullPeriod.getSeconds();
 
         for (Pair<TimePeriod, Integer> weight : weights) {
             TimePeriod intersection = TimeUtils.intersect(weight.getLeft(), fullPeriod);
