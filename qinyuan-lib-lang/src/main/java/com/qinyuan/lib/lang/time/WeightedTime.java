@@ -88,7 +88,7 @@ public class WeightedTime {
         long seconds = 3600 * 24; // seconds of one day
 
         for (Pair<TimePeriod, Integer> weight : weights) {
-            int secondsInPeriod = weight.getLeft().getSeconds();
+            long secondsInPeriod = weight.getLeft().getSeconds();
             seconds = seconds - secondsInPeriod + secondsInPeriod * weight.getRight();
         }
 
@@ -102,7 +102,7 @@ public class WeightedTime {
         for (Pair<TimePeriod, Integer> weight : weights) {
             TimePeriod intersection = TimeUtils.intersect(weight.getLeft(), fullPeriod);
             if (intersection != null) {
-                int intersectSeconds = intersection.getSeconds();
+                long intersectSeconds = intersection.getSeconds();
                 seconds = seconds - intersectSeconds + intersectSeconds * weight.getRight();
             }
         }
