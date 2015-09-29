@@ -26,7 +26,14 @@ public class WeightedTime {
         this(DateUtils.newDate(startTime), DateUtils.newDate(endTime));
     }
 
-    public WeightedTime addWeight(Time start, Time end, Integer weight) {
+    public WeightedTime addWeight(Time start, Time end, int weight) {
+        // validate
+        if (start == null) {
+            throw new IllegalArgumentException("start shouldn't be null");
+        } else if (end == null) {
+            throw new IllegalArgumentException("end shouldn't be null");
+        }
+
         TimePeriod period = new TimePeriod(start, end);
 
         // validate intersection
@@ -41,26 +48,32 @@ public class WeightedTime {
         return this;
     }
 
+    public WeightedTime clearWeight() {
+        weights.clear();
+        return this;
+    }
+
     public int countSeconds() {
         if (startTime.getTime() > endTime.getTime()) {
             return 0;
         }
-
-        int seconds = 0;
 
         int dayDiff = getDayDiff();
         if (dayDiff == 0) {
             return getWeightedSecondsInOneDay(new Time(startTime), new Time(endTime));
         }
 
+        int seconds = 0;
+
         // calculate weighted seconds of whole day
         int wholeDayCount = DateUtils.getDayDiff(startTime, endTime) - 1;
         seconds += getWeightedSecondsOfOneDay() * wholeDayCount;
 
-        // calculate weight seconds of first day
+        // calculate weighted seconds of first day
+        seconds += getWeightedSecondsInOneDay(new Time(startTime), new Time(24, 0, 0));
 
-
-        // calculate weight seconds of last day
+        // calculate weighted seconds of last day
+        seconds += getWeightedSecondsInOneDay(new Time(0, 0, 0), new Time(endTime));
 
         return seconds;
     }
@@ -83,8 +96,17 @@ public class WeightedTime {
     }
 
     private int getWeightedSecondsInOneDay(Time start, Time end) {
-        int seconds = TimeUtils.getSecondDiff(start, end);
+        TimePeriod fullPeriod = new TimePeriod(start, end);
+        int seconds = fullPeriod.getSeconds();
 
-        return 0;
+        for (Pair<TimePeriod, Integer> weight : weights) {
+            TimePeriod intersection = TimeUtils.intersect(weight.getLeft(), fullPeriod);
+            if (intersection != null) {
+                int intersectSeconds = intersection.getSeconds();
+                seconds = seconds - intersectSeconds + intersectSeconds * weight.getRight();
+            }
+        }
+
+        return seconds;
     }
 }
