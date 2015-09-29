@@ -61,4 +61,12 @@ public class IntegerUtilsTest {
         integers = Lists.newArrayList(-1, -2, -3, -4, 1, 2, 4, 3, 4, 7, 8);
         assertThat(IntegerUtils.getMaxContinuationSize(integers)).isEqualTo(4);
     }
+
+    @Test
+    public void testInOppositeDirection() {
+        assertThat(IntegerUtils.inOppositeDirection(0, 2)).isFalse();
+        assertThat(IntegerUtils.inOppositeDirection(Integer.MAX_VALUE, Integer.MIN_VALUE)).isTrue();
+        assertThat(IntegerUtils.inOppositeDirection(79200, -43200)).isTrue();
+        assertThat(IntegerUtils.inOppositeDirection(79200, 43200)).isFalse();
+    }
 }

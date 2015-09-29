@@ -1,5 +1,7 @@
 package com.qinyuan.lib.lang.time;
 
+import com.qinyuan.lib.lang.IntegerUtils;
+
 public class TimeUtils {
     final static String TIME_PATTERN = "\\d{1,2}:\\d{1,2}:\\d{1,2}";
 
@@ -23,12 +25,12 @@ public class TimeUtils {
     }
 
     public static boolean isIntersected(TimePeriod p1, TimePeriod p2) {
-        return (p1 != null && p2 != null) &&
-                TimeUtils.getSecondDiff(p1.start, p2.end) * TimeUtils.getSecondDiff(p1.end, p2.start) < 0;
+        return !(p1 == null || p2 == null) && IntegerUtils.inOppositeDirection(
+                TimeUtils.getSecondDiff(p1.start, p2.end), TimeUtils.getSecondDiff(p1.end, p2.start));
     }
 
     public static TimePeriod intersect(TimePeriod p1, TimePeriod p2) {
-        if (p1 == null || p2 == null || (!isIntersected(p1, p2))) {
+        if (!isIntersected(p1, p2)) {
             return null;
         }
 

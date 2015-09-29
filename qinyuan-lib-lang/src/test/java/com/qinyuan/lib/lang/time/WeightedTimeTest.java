@@ -50,5 +50,13 @@ public class WeightedTimeTest {
 
         weightedTime = new WeightedTime("2015-01-12 00:00:00", "2015-01-18 12:00:05");
         assertThat(weightedTime.countSeconds()).isEqualTo(3600 * 6 * 24 + 3600 * 12 + 5);
+
+        weightedTime = new WeightedTime("2015-09-28 10:00:00", "2015-09-29 16:22:50");
+        weightedTime.addWeight(new Time(10, 0, 0), new Time(22, 0, 0), 10);
+        assertThat(weightedTime.countSeconds()).isEqualTo(12 * 3600 * 10 + 12 * 3600 + (3600 * 6 + 60 * 22 + 50) * 10);
+
+        weightedTime = new WeightedTime("2015-09-28 10:00:00", "2015-09-29 22:00:00");
+        weightedTime.addWeight(new Time(10, 0, 0), new Time(22, 0, 0), 10);
+        assertThat(weightedTime.countSeconds()).isEqualTo(12 * 3600 * 10 + 12 * 3600 + 12 * 3600 * 10);
     }
 }

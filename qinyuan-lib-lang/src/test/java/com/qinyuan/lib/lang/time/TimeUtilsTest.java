@@ -32,6 +32,10 @@ public class TimeUtilsTest {
         p2 = new TimePeriod(new Time(8, 0, 0), new Time(12, 1, 0));
         assertThat(TimeUtils.isIntersected(p1, p2)).isTrue();
         assertThat(TimeUtils.isIntersected(p2, p1)).isTrue();
+
+        p1 = new TimePeriod(new Time(0, 0, 0), new Time(22, 0, 0));
+        p2 = new TimePeriod(new Time(10, 0, 0), new Time(22, 0, 0));
+        assertThat(TimeUtils.isIntersected(p1, p2)).isTrue();
     }
 
     @Test
@@ -67,6 +71,16 @@ public class TimeUtilsTest {
 
         intersection = TimeUtils.intersect(p1, p1);
         assertThat(intersection.toString()).isEqualTo("12:00:00~14:00:00");
+
+        p1 = new TimePeriod(new Time(0, 0, 0), new Time(22, 0, 0));
+        p2 = new TimePeriod(new Time(10, 0, 0), new Time(22, 0, 0));
+        intersection = TimeUtils.intersect(p1, p2);
+        assertThat(intersection.toString()).isEqualTo("10:00:00~22:00:00");
+
+        p1 = new TimePeriod(new Time(0, 0, 0), new Time(24, 0, 0));
+        p2 = new TimePeriod(new Time(2, 0, 0), new Time(24, 0, 0));
+        intersection = TimeUtils.intersect(p1, p2);
+        assertThat(intersection.toString()).isEqualTo("02:00:00~24:00:00");
     }
 
     @Test

@@ -53,4 +53,15 @@ public class IntegerUtils {
 
         return maxContinuationSize;
     }
+
+    /**
+     * validate if two number is in opposite direction
+     *
+     * @param n1 first number
+     * @param n2 first number
+     * @return true if one number is negative and the other is positive
+     */
+    public static boolean inOppositeDirection(int n1, int n2) {
+        return (n1 < 0 && n2 > 0) || (n1 > 0 && n2 < 0);
+    }
 }
