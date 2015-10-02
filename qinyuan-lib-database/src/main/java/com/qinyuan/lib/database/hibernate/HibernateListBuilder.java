@@ -121,18 +121,6 @@ public class HibernateListBuilder {
      * @return list build by raw SQL
      */
     public List<Object[]> buildBySQL(String sql) {
-        /*Session session = HibernateUtils.getSession();
-        try {
-            sql = sql + conditionBuilder.build();
-            @SuppressWarnings("unchecked")
-            List<Object[]> list = this.queryBuilder.buildSQLQuery(session, sql).list();
-            return list;
-        } catch (Throwable e) {
-            LOGGER.error("fail to get list: {}", e);
-            throw e;
-        } finally {
-            session.close();   // ensure session is closed
-        }*/
         return buildBySQL(sql, Object[].class);
     }
 
