@@ -18,6 +18,10 @@ public class SecuritySearcher {
         return this.userDao.getIdByName(SecurityUtils.getUsername());
     }
 
+    public User getUser() {
+        return this.userDao.getInstanceByName(SecurityUtils.getUsername());
+    }
+
     public boolean isAdmin() {
         return SecurityUtils.hasAuthority(ADMIN);
     }
