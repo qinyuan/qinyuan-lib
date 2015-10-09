@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.Property;
 import org.apache.tools.ant.taskdefs.SQLExec;
 import org.apache.tools.ant.types.EnumeratedAttribute;
 
@@ -44,6 +45,13 @@ public class SQLScriptExecutor {
         sqlExec.setUserid(HibernatePropertyUtils.getUsername());
         sqlExec.setPassword(HibernatePropertyUtils.getPassword());
         sqlExec.setSrc(scriptFile);
+
+        // set encoding
+        Property property = new Property();
+        property.setName("characterEncoding");
+        property.setValue(HibernatePropertyUtils.getEncoding());
+        sqlExec.addConnectionProperty(property);
+
         sqlExec.setOnerror((SQLExec.OnError) (EnumeratedAttribute.getInstance(
                 SQLExec.OnError.class, "abort")));
         sqlExec.setPrint(true);

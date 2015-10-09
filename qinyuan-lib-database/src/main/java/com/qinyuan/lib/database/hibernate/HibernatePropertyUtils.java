@@ -27,6 +27,10 @@ public class HibernatePropertyUtils {
         return properties.getProperty("connection.driver_class");
     }
 
+    public static String getEncoding() {
+        return properties.getProperty("connection.characterEncoding");
+    }
+
     private final static Pattern hostPattern = Pattern.compile("(?<=jdbc:mysql://)[^:]+");
 
     public static String getHost() {
