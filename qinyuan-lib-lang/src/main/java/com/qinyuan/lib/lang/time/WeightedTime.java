@@ -66,8 +66,9 @@ public class WeightedTime {
         long seconds = 0;
 
         // calculate weighted seconds of whole day
-        int wholeDayCount = DateUtils.getDayDiff(startTime, endTime) - 1;
-        seconds += getWeightedSecondsOfOneDay() * wholeDayCount;
+        if (dayDiff > 1) {
+            seconds += getWeightedSecondsOfOneDay() * (dayDiff - 1);
+        }
 
         // calculate weighted seconds of first day
         seconds += getWeightedSecondsInOneDay(new Time(startTime), new Time(24, 0, 0));

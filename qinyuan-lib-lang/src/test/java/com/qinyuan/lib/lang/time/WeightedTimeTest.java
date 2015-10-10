@@ -59,6 +59,9 @@ public class WeightedTimeTest {
         weightedTime.addWeight(new Time(10, 0, 0), new Time(22, 0, 0), 10);
         assertThat(weightedTime.countSeconds()).isEqualTo(12 * 3600 * 10 + 12 * 3600 + 12 * 3600 * 10);
 
+        weightedTime = new WeightedTime("2015-10-10 22:18:22", "2015-10-11 21:15:00");
+        weightedTime.addWeight(new Time(10, 0, 0), new Time(22, 0, 0), 10);
+        System.out.println(weightedTime.countSeconds());
 
         weightedTime = new WeightedTime("2015-09-28 10:00:00", "2015-09-29 22:00:00");
         weightedTime.addWeight(new Time(10, 0, 0), new Time(22, 0, 0), 10000000);
