@@ -15,6 +15,8 @@ public class HibernateListBuilder {
 
     private final SQLConditionBuilder conditionBuilder = new SQLConditionBuilder();
     private final HibernateQueryBuilder queryBuilder = new HibernateQueryBuilder();
+    private int firstResult = -1;
+    private int maxResults = -1;
 
     /**
      * add filter condition
@@ -49,7 +51,8 @@ public class HibernateListBuilder {
     }
 
     public HibernateListBuilder limit(int firstResult, int maxResults) {
-        this.queryBuilder.limit(firstResult, maxResults);
+        this.firstResult = firstResult;
+        this.maxResults = maxResults;
         return this;
     }
 
@@ -81,31 +84,36 @@ public class HibernateListBuilder {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public <T> List<T> build(Class<T> clazz) {
-        Session session = HibernateUtils.getSession();
-        try {
-            String hql = "FROM " + clazz.getSimpleName() + conditionBuilder.build();
-            @SuppressWarnings("unchecked")
-            List<T> list = this.queryBuilder.buildQuery(session, hql).list();
-            return list;
-        } catch (Throwable e) {
-            LOGGER.error("fail to get list: {}", e);
-            throw e;
-        } finally {
-            session.close();   // ensure session is closed
-        }
+        return build(buildHqlByClass(clazz), this.firstResult, this.maxResults);
+    }
+
+    private String buildHqlByClass(Class<?> clazz) {
+        return "FROM " + clazz.getSimpleName();
     }
 
     public List build(String hql) {
+        return build(adjustHql(hql), this.firstResult, this.maxResults);
+    }
+
+    private String adjustHql(String hql) {
+        hql = hql.trim();
+        String lowerCaseHql = hql.toLowerCase();
+        if (lowerCaseHql.startsWith("distinct")) {
+            hql = "SELECT " + hql;
+        } else if (!lowerCaseHql.startsWith("from") && !lowerCaseHql.startsWith("select")) {
+            hql = "FROM " + hql;
+        }
+        return hql;
+    }
+
+    private List build(String hql, int firstResult, int maxResults) {
+        hql += conditionBuilder.build();
         Session session = HibernateUtils.getSession();
         try {
-            hql = hql.trim();
-            if (!hql.toLowerCase().startsWith("from") && !hql.toLowerCase().startsWith("select")) {
-                hql = "FROM " + hql;
-            }
-            hql += conditionBuilder.build();
             @SuppressWarnings("unchecked")
-            List list = this.queryBuilder.buildQuery(session, hql).list();
+            List list = this.queryBuilder.limit(firstResult, maxResults).buildQuery(session, hql).list();
             return list;
         } catch (Throwable e) {
             LOGGER.error("fail to get list: {}", e);
@@ -124,13 +132,16 @@ public class HibernateListBuilder {
         return buildBySQL(sql, Object[].class);
     }
 
+    @SuppressWarnings("unchecked")
     public <T> List<T> buildBySQL(String sql, Class<T> clazz) {
+        sql = sql + conditionBuilder.build();
+        return buildBySQL(sql, this.firstResult, this.maxResults);
+    }
+
+    public List buildBySQL(String finalSql, int firstResult, int maxResults) {
         Session session = HibernateUtils.getSession();
         try {
-            sql = sql + conditionBuilder.build();
-            @SuppressWarnings("unchecked")
-            List<T> list = this.queryBuilder.buildSQLQuery(session, sql).list();
-            return list;
+            return this.queryBuilder.limit(firstResult, maxResults).buildSQLQuery(session, finalSql).list();
         } catch (Throwable e) {
             LOGGER.error("fail to get list: {}", e);
             throw e;
@@ -140,17 +151,18 @@ public class HibernateListBuilder {
     }
 
     public <T> T getFirstItem(Class<T> clazz) {
-        List<T> items = build(clazz);
+        @SuppressWarnings("unchecked")
+        List<T> items = build(buildHqlByClass(clazz), 0, 1);
         return items.size() == 0 ? null : items.get(0);
     }
 
     public Object getFirstItem(String hql) {
-        List items = build(hql);
+        List items = build(adjustHql(hql), 0, 1);
         return items.size() == 0 ? null : items.get(0);
     }
 
     public Object getFirstItemBySQL(String sql) {
-        List items = buildBySQL(sql);
+        List items = buildBySQL(sql, 0, 1);
         return items.size() == 0 ? null : items.get(0);
     }
 }

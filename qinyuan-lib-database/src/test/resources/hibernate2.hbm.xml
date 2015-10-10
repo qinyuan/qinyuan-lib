@@ -3,12 +3,12 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.qinyuan.lib.mvc.security">
-    <!--<class name="User" table="u_user">
-        <id name="id" column="user_id">
+<hibernate-mapping package="com.qinyuan.lib.database">
+    <class name="User" table="user">
+        <id name="id" column="id">
             <generator class="identity"/>
         </id>
-        <property name="username" column="name"/>
+        <property name="username"/>
         <property name="password"/>
-    </class>-->
+    </class>
 </hibernate-mapping>
