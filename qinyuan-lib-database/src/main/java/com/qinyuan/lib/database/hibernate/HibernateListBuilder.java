@@ -134,14 +134,14 @@ public class HibernateListBuilder {
 
     @SuppressWarnings("unchecked")
     public <T> List<T> buildBySQL(String sql, Class<T> clazz) {
-        sql = sql + conditionBuilder.build();
         return buildBySQL(sql, this.firstResult, this.maxResults);
     }
 
-    public List buildBySQL(String finalSql, int firstResult, int maxResults) {
+    public List buildBySQL(String sql, int firstResult, int maxResults) {
+        sql = sql + conditionBuilder.build();
         Session session = HibernateUtils.getSession();
         try {
-            return this.queryBuilder.limit(firstResult, maxResults).buildSQLQuery(session, finalSql).list();
+            return this.queryBuilder.limit(firstResult, maxResults).buildSQLQuery(session, sql).list();
         } catch (Throwable e) {
             LOGGER.error("fail to get list: {}", e);
             throw e;

@@ -21,6 +21,9 @@ public class HibernateListBuilderTest extends DatabaseTestCase {
             assertThat(objects).hasSize(3);
         }
 
+        list = new HibernateListBuilder().addEqualFilter("password", "password3").buildBySQL("SELECT * FROM user");
+        assertThat(list).hasSize(2);
+
         List<Integer> integers = new HibernateListBuilder().buildBySQL("SELECT id FROM user", Integer.class);
         assertThat(integers).hasSize(4);
         for (Integer integer : integers) {
@@ -40,6 +43,7 @@ public class HibernateListBuilderTest extends DatabaseTestCase {
     @Test
     public void testCountBySQL() {
         assertThat(new HibernateListBuilder().countBySQL("user")).isEqualTo(4);
+        assertThat(new HibernateListBuilder().addEqualFilter("password", "password3").countBySQL("user")).isEqualTo(2);
     }
 
     @Test
