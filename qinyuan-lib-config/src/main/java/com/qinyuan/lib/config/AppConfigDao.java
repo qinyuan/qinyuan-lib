@@ -2,6 +2,7 @@ package com.qinyuan.lib.config;
 
 import com.qinyuan.lib.database.hibernate.HibernateListBuilder;
 import com.qinyuan.lib.database.hibernate.HibernateUtils;
+import com.qinyuan.lib.lang.IntegerUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 /**
@@ -58,6 +59,11 @@ public class AppConfigDao {
         } else {
             return null;
         }
+    }
+
+    public Integer getPositiveInteger(String name) {
+        Integer integer = getInteger(name);
+        return IntegerUtils.isPositive(integer) ? integer : null;
     }
 
     public void saveInteger(String name, Integer value) {
