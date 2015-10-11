@@ -2,6 +2,7 @@ package com.qinyuan.lib.database.hibernate;
 
 import com.qinyuan.lib.lang.IntegerUtils;
 import com.qinyuan.lib.lang.file.ClasspathFileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -51,6 +52,11 @@ public class HibernateUtils {
     }
 
     public static void commit(Session session) {
+        if (session == null) {
+            LOGGER.error("session is null");
+            return;
+        }
+
         try {
             session.getTransaction().commit();
         } catch (Throwable e) {
@@ -62,6 +68,11 @@ public class HibernateUtils {
     }
 
     public static Integer save(Object object) {
+        if (object == null) {
+            LOGGER.error("object is null");
+            return null;
+        }
+
         Session session = getSession();
         try {
             return (Integer) session.save(object);
@@ -74,6 +85,11 @@ public class HibernateUtils {
     }
 
     public static void batchSave(List<?> instances) {
+        if (instances == null) {
+            LOGGER.warn("instances is null");
+            return;
+        }
+
         Session session = getSession();
         try {
             for (Object instance : instances) {
@@ -90,6 +106,11 @@ public class HibernateUtils {
     }
 
     public static void saveOrUpdate(Object object) {
+        if (object == null) {
+            LOGGER.error("object is null");
+            return;
+        }
+
         Session session = getSession();
         try {
             session.saveOrUpdate(object);
@@ -102,6 +123,11 @@ public class HibernateUtils {
     }
 
     public static void update(Object object) {
+        if (object == null) {
+            LOGGER.error("object is null");
+            return;
+        }
+
         Session session = getSession();
         try {
             session.update(object);
@@ -114,6 +140,11 @@ public class HibernateUtils {
     }
 
     public static void executeUpdate(String hql) {
+        if (StringUtils.isBlank(hql)) {
+            LOGGER.error("invalid hql: {}", hql);
+            return;
+        }
+
         Session session = HibernateUtils.getSession();
         try {
             session.createQuery(hql).executeUpdate();
@@ -126,6 +157,11 @@ public class HibernateUtils {
     }
 
     public static void executeSQLUpdate(String... sqls) {
+        if (sqls == null) {
+            LOGGER.error("sqls is null");
+            return;
+        }
+
         Session session = HibernateUtils.getSession();
         try {
             for (String sql : sqls) {
