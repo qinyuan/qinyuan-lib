@@ -6,8 +6,20 @@ import org.apache.commons.beanutils.BeanUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * extract id and certain field of persist objects,
+ * then wrap them into class SelectFormItem,
+ * which can be used in select form
+ */
 public class SelectFormItemsBuilder {
 
+    /**
+     * create select form item list by persists objects
+     *
+     * @param persistObjects persists object list
+     * @param valueField     field to extract value
+     * @return select form item list
+     */
     public List<SelectFormItem> build(List<? extends PersistObject> persistObjects, String valueField) {
         try {
             List<SelectFormItem> items = new ArrayList<>();
