@@ -16,7 +16,7 @@ public class Js extends CssJsBase {
     @Override
     public int doEndTag() throws JspException {
         print("<script src=\"");
-        if (!src.startsWith(PREFIX)) {
+        if (!src.startsWith(PREFIX) && !src.startsWith("http://")) {
             print(JS_PREFIX);
         }
         print(src);

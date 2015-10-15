@@ -18,7 +18,7 @@ public class Css extends CssJsBase {
     public int doEndTag() throws JspException {
         print("<link href=\"");
 
-        if (!href.startsWith(PREFIX)) {
+        if (!href.startsWith(PREFIX) && !href.startsWith("http://")) {
             print(CSS_PREFIX);
         }
         print(href);
