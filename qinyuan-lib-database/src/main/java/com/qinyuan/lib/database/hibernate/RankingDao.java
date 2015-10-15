@@ -19,9 +19,13 @@ public class RankingDao {
     public final static String ASC_ORDER = " ORDER BY ranking ASC";
     public final static String DESC_ORDER = " ORDER BY ranking DESC";
 
-
     public <T extends Ranking> T getFirstInstance(Class<T> clazz) {
         return getRankingListBuilder().getFirstItem(clazz);
+    }
+
+    public <T extends Ranking> T getInstanceByRankIndex(Class<T> clazz, int rankIndex) {
+        List<T> instances = getRankingListBuilder().limit(rankIndex - 1, 1).build(clazz);
+        return instances.size() > 0 ? instances.get(0) : null;
     }
 
     public <T extends Ranking> List<T> getInstances(Class<T> clazz) {
@@ -30,6 +34,11 @@ public class RankingDao {
 
     public <T extends Ranking> List<T> getInstances(Class<T> clazz, int firstResult, int maxResult) {
         return getRankingListBuilder().limit(firstResult, maxResult).build(clazz);
+    }
+
+    public <T extends Ranking> int getRankIndex(T instance) {
+        int ranking = instance.getRanking();
+        return new HibernateListBuilder().addFilter("ranking<" + ranking).count(instance.getClass()) + 1;
     }
 
     private HibernateListBuilder getRankingListBuilder() {
@@ -128,6 +137,20 @@ public class RankingDao {
             LOGGER.warn("There is no next instance of {}", getLogIdentity(current));
         } else {
             this.switchRanking(current, next);
+        }
+    }
+
+    public <T extends Ranking> void rankTo(Class<T> clazz, int id, int index) {
+        T current = HibernateUtils.get(clazz, id);
+        int currentIndex = getRankIndex(current);
+        if (index > currentIndex) {
+            for (int i = 0; i < index - currentIndex; i++) {
+                rankDown(clazz, id);
+            }
+        } else if (index < currentIndex) {
+            for (int i = 0; i < currentIndex - index; i++) {
+                rankUp(clazz, id);
+            }
         }
     }
 
