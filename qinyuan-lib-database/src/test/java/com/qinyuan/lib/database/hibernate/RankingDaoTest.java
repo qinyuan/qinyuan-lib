@@ -69,11 +69,19 @@ public class RankingDaoTest extends DatabaseTestCase {
         assertThat(getRanking(2).getRanking()).isEqualTo(2);
         assertThat(getRanking(1).getRanking()).isEqualTo(3);
 
+        dao.rankTo(RankingImpl.class, 4, 14);
+        assertThat(getRanking(4).getRanking()).isEqualTo(4);
+
         dao.rankTo(RankingImpl.class, 4, 3);
         assertThat(getRanking(4).getRanking()).isEqualTo(3);
         assertThat(getRanking(3).getRanking()).isEqualTo(1);
         assertThat(getRanking(2).getRanking()).isEqualTo(2);
         assertThat(getRanking(1).getRanking()).isEqualTo(4);
+
+
+        dao.rankTo(RankingImpl.class, 4, 14);
+        assertThat(getRanking(4).getRanking()).isEqualTo(4);
+        assertThat(getRanking(1).getRanking()).isEqualTo(3);
     }
 
     private RankingImpl getRanking(int id) {

@@ -141,6 +141,12 @@ public class RankingDao {
     }
 
     public <T extends Ranking> void rankTo(Class<T> clazz, int id, int index) {
+        // adjust index
+        int maxIndex = new HibernateListBuilder().count(clazz);
+        if (index > maxIndex) {
+            index = maxIndex;
+        }
+
         T current = HibernateUtils.get(clazz, id);
         int currentIndex = getRankIndex(current);
         if (index > currentIndex) {
