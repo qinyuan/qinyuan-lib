@@ -3,9 +3,11 @@ package com.qinyuan.lib.mvc.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.qinyuan.lib.mvc.security.SecuritySearcher;
+import com.qinyuan.lib.mvc.security.SecurityUtils;
 import com.qinyuan.lib.network.url.UrlUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,13 @@ public class BaseController {
 
     @Autowired
     protected SecuritySearcher securitySearcher;
+
+    @Autowired
+    protected AuthenticationManager authenticationManager;
+
+    protected void login(String username, String password) {
+        SecurityUtils.login(request, authenticationManager, username, password);
+    }
 
     protected String redirect(String page) {
         return "redirect:" + page;
