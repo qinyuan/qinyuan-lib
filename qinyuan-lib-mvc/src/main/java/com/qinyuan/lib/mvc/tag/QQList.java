@@ -13,6 +13,7 @@ public class QQList extends MyTagSupport {
     private boolean showInput;
     private String nId;
     private String email;
+    private boolean newPage = true;
 
     public void setShowInput(boolean showInput) {
         this.showInput = showInput;
@@ -26,12 +27,20 @@ public class QQList extends MyTagSupport {
         this.email = email;
     }
 
+    public void setNewPage(boolean newPage) {
+        this.newPage = newPage;
+    }
+
     @Override
     public int doStartTag() throws JspException {
         print("<form ");
         printIdIfNotBlank();
         printCssClassIfNotBlank();
-        print(" action=\"" + ACTION + "\" target=\"_blank\" method=\"post\">");
+        print(" action=\"" + ACTION + "\" ");
+        if (newPage) {
+            print("target=\"_blank\" ");
+        }
+        print(" method=\"post\">");
 
         print("<input type=\"hidden\" name=\"t\" value=\"qf_booked_feedback\">");
         print("<input type=\"hidden\" name=\"id\" value=\"" + nId + "\">");

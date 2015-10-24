@@ -228,6 +228,12 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <name>newPage</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <name>email</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
