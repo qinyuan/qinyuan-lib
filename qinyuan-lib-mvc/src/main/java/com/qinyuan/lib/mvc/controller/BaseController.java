@@ -94,6 +94,11 @@ public class BaseController {
         return getUserAgentObject().getBrowser();
     }
 
+    protected boolean isMobileUserAgent() {
+        UserAgent.OS os = getUserAgentOS();
+        return os.equals(UserAgent.OS.IOS) || os.equals(UserAgent.OS.ANDROID);
+    }
+
     private UserAgent getUserAgentObject() {
         return new UserAgent(request);
     }
