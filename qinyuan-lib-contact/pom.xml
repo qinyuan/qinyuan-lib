@@ -22,7 +22,11 @@
             <artifactId>qinyuan-lib-database</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.qinyuan-lib</groupId>
+            <artifactId>qinyuan-lib-network</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
