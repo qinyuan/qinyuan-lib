@@ -1,5 +1,6 @@
 package com.qinyuan.lib.contact.mail;
 
+import com.qinyuan.lib.lang.ExceptionUtils;
 import org.junit.Test;
 
 public class SendCloudMailSenderTest {
@@ -21,7 +22,7 @@ public class SendCloudMailSenderTest {
         try {
             new SendCloudMailSender(user, domainName, apiKey).send(to, subject, content);
         } catch (Exception e) {
-            System.out.println("\nexception: " + e.getCause().getMessage());
+            System.out.println("\nexception: " + ExceptionUtils.getMessage(e));
         }
     }
 }

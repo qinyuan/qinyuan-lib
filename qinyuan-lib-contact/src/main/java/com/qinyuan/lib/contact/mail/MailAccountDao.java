@@ -1,16 +1,10 @@
 package com.qinyuan.lib.contact.mail;
 
-import com.qinyuan.lib.database.hibernate.HibernateDeleter;
+import com.qinyuan.lib.database.hibernate.AbstractDao;
 import com.qinyuan.lib.database.hibernate.HibernateListBuilder;
 import com.qinyuan.lib.database.hibernate.HibernateUtils;
 
-import java.util.List;
-
-public class MailAccountDao {
-    public MailAccount getInstance(Integer id) {
-        return HibernateUtils.get(MailAccount.class, id);
-    }
-
+public class MailAccountDao extends AbstractDao<MailAccount> {
     public Integer add(String host, String username, String password) {
         MailAccount account = new MailAccount();
         account.setHost(host);
@@ -26,14 +20,6 @@ public class MailAccountDao {
             account.setPassword(password);
             HibernateUtils.update(account);
         }
-    }
-
-    public void delete(Integer id) {
-        HibernateDeleter.deleteById(MailAccount.class, id);
-    }
-
-    public List<MailAccount> getInstances() {
-        return new HibernateListBuilder().build(MailAccount.class);
     }
 
     public boolean hasUsername(String username) {
