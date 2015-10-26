@@ -3,39 +3,22 @@ package com.qinyuan.lib.contact.mail;
 import com.qinyuan.lib.database.hibernate.PersistObject;
 
 public class MailAccount extends PersistObject {
-    /**
-     * host, such as smtp.sina.com
-     */
-    private String host;
+    private Integer referenceId;
+    private String type;
 
-    /**
-     * username, such as test12345@sina.com
-     */
-    private String username;
-
-    private String password;
-
-    public String getHost() {
-        return host;
+    public Integer getReferenceId() {
+        return referenceId;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public String getType() {
+        return type;
     }
 
-    public String getUsername() {
-        return username;
+    public void setReferenceId(Integer referenceId) {
+        this.referenceId = referenceId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setType(String type) {
+        this.type = type;
     }
 }

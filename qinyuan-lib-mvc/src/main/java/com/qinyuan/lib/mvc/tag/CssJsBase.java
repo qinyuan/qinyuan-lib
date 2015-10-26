@@ -17,7 +17,7 @@ class CssJsBase extends MyTagSupport {
 
     protected void printVersion() {
         if (version) {
-            print("?=" + VERSION);
+            print("?t=" + VERSION);
         }
     }
 }
