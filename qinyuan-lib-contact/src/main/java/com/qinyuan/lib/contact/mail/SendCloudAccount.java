@@ -2,7 +2,7 @@ package com.qinyuan.lib.contact.mail;
 
 import com.qinyuan.lib.database.hibernate.PersistObject;
 
-public class SendCloudAccount extends PersistObject {
+public class SendCloudAccount extends PersistObject implements RealMailAccount {
     /**
      * user, such as qinyuan_test_KhSmWe
      */
@@ -40,5 +40,11 @@ public class SendCloudAccount extends PersistObject {
 
     public void setDomainName(String domainName) {
         this.domainName = domainName;
+    }
+
+    //////////////////////////// derived fields //////////////////////////
+    @Override
+    public String getUsername() {
+        return getUsername() + "@" + getDomainName();
     }
 }

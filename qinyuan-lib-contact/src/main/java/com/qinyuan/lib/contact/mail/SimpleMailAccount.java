@@ -2,7 +2,7 @@ package com.qinyuan.lib.contact.mail;
 
 import com.qinyuan.lib.database.hibernate.PersistObject;
 
-public class SimpleMailAccount extends PersistObject {
+public class SimpleMailAccount extends PersistObject implements RealMailAccount {
     /**
      * host, such as smtp.sina.com
      */
