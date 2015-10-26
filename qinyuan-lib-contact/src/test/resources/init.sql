@@ -17,7 +17,8 @@ create table sendcloud_account (
   id int primary key auto_increment,
   user char(200) not null,
   api_key char(200) not null,
-  domain_name char(200) not null
+  domain_name char(200) not null,
+  unique(user, domain_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 

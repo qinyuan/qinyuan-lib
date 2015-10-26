@@ -12,15 +12,6 @@ public class MailAccountDao extends AbstractDao<MailAccount> {
         return HibernateUtils.save(account);
     }
 
-    /*public void update(Integer id, Integer referenceId, String type) {
-        MailAccount account = getInstance(id);
-        if (account != null) {
-            account.setReferenceId(referenceId);
-            account.setType(type);
-            HibernateUtils.update(account);
-        }
-    }*/
-
     public RealMailAccount getReference(Integer id) {
         return getReference(getInstance(id));
     }
