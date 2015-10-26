@@ -4,11 +4,12 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.qinyuan.lib.contact.mail">
-    <class name="MailAccount" table="mail_account">
+    <class name="com.qinyuan.lib.contact.mail.SimpleMailAccount" table="simple_mail_account">
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
-        <property name="referenceId" column="reference_id"/>
-        <property name="type"/>
+        <property name="host" column="host"/>
+        <property name="username" column="username"/>
+        <property name="password" column="password"/>
     </class>
 </hibernate-mapping>
