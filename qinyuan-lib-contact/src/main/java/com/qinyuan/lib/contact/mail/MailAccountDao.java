@@ -12,19 +12,27 @@ public class MailAccountDao extends AbstractDao<MailAccount> {
         return HibernateUtils.save(account);
     }
 
-    public void update(Integer id, Integer referenceId, String type) {
+    /*public void update(Integer id, Integer referenceId, String type) {
         MailAccount account = getInstance(id);
         if (account != null) {
             account.setReferenceId(referenceId);
             account.setType(type);
             HibernateUtils.update(account);
         }
+    }*/
+
+    public RealMailAccount getReference(Integer id) {
+        return getReference(getInstance(id));
     }
 
     public RealMailAccount getReference(MailAccount account) {
+        if (account == null) {
+            return null;
+        }
+
         String type = account.getType();
         if (StringUtils.isBlank(type)) {
-            throw new RuntimeException("blank type: " + type);
+            return null;
         }
 
         if (type.equals(SimpleMailAccount.class.getSimpleName())) {
@@ -32,7 +40,7 @@ public class MailAccountDao extends AbstractDao<MailAccount> {
         } else if (type.equals(SendCloudAccount.class.getSimpleName())) {
             return new SendCloudAccountDao().getInstance(account.getReferenceId());
         } else {
-            throw new RuntimeException("unrecognized type: " + type);
+            return null;
         }
     }
 }

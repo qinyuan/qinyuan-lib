@@ -9,7 +9,9 @@ public class SendCloudAccountDao extends AbstractDao<SendCloudAccount> {
         account.setUser(user);
         account.setApiKey(apiKey);
         account.setDomainName(domainName);
-        return HibernateUtils.save(account);
+        Integer id = HibernateUtils.save(account);
+        new MailAccountDao().add(id, getPersistClass().getSimpleName());
+        return id;
     }
 
     public void update(Integer id, String user, String apiKey, String domainName) {

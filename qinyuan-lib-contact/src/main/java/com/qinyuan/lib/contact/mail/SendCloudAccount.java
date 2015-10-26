@@ -45,6 +45,6 @@ public class SendCloudAccount extends PersistObject implements RealMailAccount {
     //////////////////////////// derived fields //////////////////////////
     @Override
     public String getUsername() {
-        return getUsername() + "@" + getDomainName();
+        return user + "@" + domainName;
     }
 }

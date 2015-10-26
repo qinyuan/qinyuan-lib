@@ -10,7 +10,9 @@ public class SimpleMailAccountDao extends AbstractDao<SimpleMailAccount> {
         account.setHost(host);
         account.setUsername(username);
         account.setPassword(password);
-        return HibernateUtils.save(account);
+        Integer id = HibernateUtils.save(account);
+        new MailAccountDao().add(id, getPersistClass().getSimpleName());
+        return id;
     }
 
     public void update(Integer id, String host, String password) {
@@ -23,6 +25,6 @@ public class SimpleMailAccountDao extends AbstractDao<SimpleMailAccount> {
     }
 
     public boolean hasUsername(String username) {
-        return new HibernateListBuilder().addEqualFilter("username", username).count(SimpleMailAccount.class) > 0;
+        return new HibernateListBuilder().addEqualFilter("username", username).count(getPersistClass()) > 0;
     }
 }
