@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.qinyuan.lib.contact.mail">
-    <class name="com.qinyuan.lib.contact.mail.SimpleMailAccount" table="simple_mail_account">
+    <class name="SimpleMailAccount" table="simple_mail_account">
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
