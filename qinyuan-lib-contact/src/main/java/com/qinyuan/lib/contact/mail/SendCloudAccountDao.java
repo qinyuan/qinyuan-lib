@@ -4,7 +4,7 @@ import com.qinyuan.lib.database.hibernate.AbstractDao;
 import com.qinyuan.lib.database.hibernate.HibernateUtils;
 
 public class SendCloudAccountDao extends AbstractDao<SendCloudAccount> {
-    public Integer add(String user, String apiKey, String domainName) {
+    public Integer add(String user, String domainName, String apiKey) {
         SendCloudAccount account = new SendCloudAccount();
         account.setUser(user);
         account.setApiKey(apiKey);
@@ -14,7 +14,7 @@ public class SendCloudAccountDao extends AbstractDao<SendCloudAccount> {
         return id;
     }
 
-    public void update(Integer id, String user, String apiKey, String domainName) {
+    public void update(Integer id, String user, String domainName, String apiKey) {
         SendCloudAccount account = getInstance(id);
         if (account != null) {
             account.setUser(user);
