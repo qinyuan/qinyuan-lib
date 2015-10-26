@@ -12,11 +12,32 @@ public class MailAccountDao extends AbstractDao<MailAccount> {
         return HibernateUtils.save(account);
     }
 
+    @Override
+    public void delete(Integer id) {
+        MailAccount account = getInstance(id);
+        if (account != null) {
+            AbstractDao<? extends RealMailAccount> referenceDao = getReferenceDao(account);
+            if (referenceDao != null) {
+                referenceDao.delete(account.getReferenceId());
+            }
+        }
+
+        super.delete(id);
+    }
+
     public RealMailAccount getReference(Integer id) {
         return getReference(getInstance(id));
     }
 
     public RealMailAccount getReference(MailAccount account) {
+        if (account == null) {
+            return null;
+        }
+        AbstractDao<? extends RealMailAccount> referenceDao = getReferenceDao(account);
+        return referenceDao == null ? null : referenceDao.getInstance(account.getReferenceId());
+    }
+
+    private AbstractDao<? extends RealMailAccount> getReferenceDao(MailAccount account) {
         if (account == null) {
             return null;
         }
@@ -27,9 +48,9 @@ public class MailAccountDao extends AbstractDao<MailAccount> {
         }
 
         if (type.equals(SimpleMailAccount.class.getSimpleName())) {
-            return new SimpleMailAccountDao().getInstance(account.getReferenceId());
+            return new SimpleMailAccountDao();
         } else if (type.equals(SendCloudAccount.class.getSimpleName())) {
-            return new SendCloudAccountDao().getInstance(account.getReferenceId());
+            return new SendCloudAccountDao();
         } else {
             return null;
         }

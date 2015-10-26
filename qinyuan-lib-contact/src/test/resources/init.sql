@@ -23,7 +23,7 @@ create table sendcloud_account (
 
 
 /************** data ************************/
-insert into mail_account(reference_id, type) values(1, "SimpleMailAccount"), (2, "SimpleMailAccount"), (1, "SendCloudAccount");
+insert into mail_account(reference_id, type) values(2, "SimpleMailAccount"), (1, "SimpleMailAccount"), (1, "SendCloudAccount");
 
 insert into simple_mail_account(host,username,password) values('host1', 'username1', 'password1'), ('host2', 'username2', 'password2');
 

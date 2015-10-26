@@ -21,4 +21,10 @@ public class MailAccount extends PersistObject {
     public void setType(String type) {
         this.type = type;
     }
+
+
+    /////////////////////////// derive fields ///////////////////////////////
+    public String getUsername() {
+        return new MailAccountDao().getUsername(this);
+    }
 }

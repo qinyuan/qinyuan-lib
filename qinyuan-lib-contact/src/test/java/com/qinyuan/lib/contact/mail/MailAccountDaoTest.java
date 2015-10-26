@@ -17,10 +17,23 @@ public class MailAccountDaoTest extends DatabaseTestCase {
     }
 
     @Test
+    public void testDelete() {
+        assertThat(dao.count()).isEqualTo(3);
+        assertThat(new SimpleMailAccountDao().count()).isEqualTo(2);
+
+        dao.delete(2);
+
+        assertThat(dao.count()).isEqualTo(2);
+        assertThat(new SimpleMailAccountDao().count()).isEqualTo(1);
+        assertThat(new SimpleMailAccountDao().hasUsername("username1")).isFalse();
+        assertThat(new SimpleMailAccountDao().hasUsername("username2")).isTrue();
+    }
+
+    @Test
     public void testGetReference() throws Exception {
         RealMailAccount account = dao.getReference(dao.getInstance(1));
         assertThat(account).isExactlyInstanceOf(SimpleMailAccount.class);
-        assertThat(account.getUsername()).isEqualTo("username1");
+        assertThat(account.getUsername()).isEqualTo("username2");
 
         account = dao.getReference(dao.getInstance(3));
         assertThat(account).isExactlyInstanceOf(SendCloudAccount.class);
