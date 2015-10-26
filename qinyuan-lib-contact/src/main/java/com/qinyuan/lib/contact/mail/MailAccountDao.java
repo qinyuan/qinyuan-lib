@@ -34,4 +34,13 @@ public class MailAccountDao extends AbstractDao<MailAccount> {
             return null;
         }
     }
+
+    public String getUsername(MailAccount account) {
+        RealMailAccount realMailAccount = getReference(account);
+        if (realMailAccount == null) {
+            return null;
+        } else {
+            return realMailAccount.getUsername();
+        }
+    }
 }
