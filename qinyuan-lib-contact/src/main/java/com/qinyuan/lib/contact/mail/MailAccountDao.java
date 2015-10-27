@@ -1,10 +1,16 @@
 package com.qinyuan.lib.contact.mail;
 
 import com.qinyuan.lib.database.hibernate.AbstractDao;
+import com.qinyuan.lib.database.hibernate.HibernateListBuilder;
 import com.qinyuan.lib.database.hibernate.HibernateUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class MailAccountDao extends AbstractDao<MailAccount> {
+    @Override
+    protected HibernateListBuilder getListBuilder() {
+        return super.getListBuilder().addOrder("type", false).addOrder("id", true);
+    }
+
     public Integer add(Integer referenceId, String type) {
         MailAccount account = new MailAccount();
         account.setReferenceId(referenceId);
@@ -27,6 +33,11 @@ public class MailAccountDao extends AbstractDao<MailAccount> {
 
     public RealMailAccount getReference(Integer id) {
         return getReference(getInstance(id));
+    }
+
+    public Integer getReferenceId(Integer id) {
+        MailAccount account = getInstance(id);
+        return account == null ? null : account.getReferenceId();
     }
 
     public RealMailAccount getReference(MailAccount account) {

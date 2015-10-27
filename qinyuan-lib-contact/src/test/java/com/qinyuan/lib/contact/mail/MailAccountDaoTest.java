@@ -10,6 +10,13 @@ public class MailAccountDaoTest extends DatabaseTestCase {
     private MailAccountDao dao = new MailAccountDao();
 
     @Test
+    public void testGetInstances() {
+        assertThat(dao.getInstances().get(0).getId()).isEqualTo(1);
+        assertThat(dao.getInstances().get(1).getId()).isEqualTo(2);
+        assertThat(dao.getInstances().get(2).getId()).isEqualTo(3);
+    }
+
+    @Test
     public void testAdd() throws Exception {
         assertThat(dao.count()).isEqualTo(3);
         dao.add(1, "test");
