@@ -38,6 +38,10 @@ class SQLConditionBuilder {
         return this.addFilter(field + "=:" + field);
     }
 
+    public SQLConditionBuilder addEqualFilterIgnoreCase(String field) {
+        return this.addFilter("LOWER(" + field + ")=LOWER(:" + field + ")");
+    }
+
     public SQLConditionBuilder addOrder(String field, boolean asc) {
         if (StringUtils.isBlank(field)) {
             return this;

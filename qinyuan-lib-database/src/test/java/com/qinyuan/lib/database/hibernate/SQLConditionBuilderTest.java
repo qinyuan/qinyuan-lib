@@ -44,5 +44,8 @@ public class SQLConditionBuilderTest {
 
         builder = new SQLConditionBuilder().addEqualFilter("testField");
         assertThat(builder.build()).isEqualTo(" WHERE (testField=:testField)");
+
+        builder = new SQLConditionBuilder().addEqualFilterIgnoreCase("testField");
+        assertThat(builder.build()).isEqualTo(" WHERE (LOWER(testField)=LOWER(:testField))");
     }
 }

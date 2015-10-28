@@ -1,27 +1,39 @@
 package com.qinyuan.lib.mvc.security;
 
 import com.qinyuan.lib.database.hibernate.HibernateListBuilder;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A simple dao to handle user
  * Created by qinyuan on 15-6-14.
  */
 public class SimpleUserDao implements IUserDao {
+    private boolean ignoreCase = true;
+
+    public void setIgnoreCase(boolean ignoreCase) {
+        this.ignoreCase = ignoreCase;
+    }
+
     @Override
     public User getInstanceByName(String username) {
-        if (!StringUtils.hasText(username)) {
+        if (StringUtils.isBlank(username)) {
             return null;
         }
 
-        return new HibernateListBuilder()
-                .addFilter("username=:username").addArgument("username", username)
-                .getFirstItem(User.class);
+        HibernateListBuilder listBuilder = new HibernateListBuilder();
+        if (ignoreCase) {
+        //listBuilder.addFilter("LOWER(email")
+        } else {
+            listBuilder.addEqualFilter("username", username);
+        }
+        return listBuilder.getFirstItem(User.class);
+        /*return new HibernateListBuilder().addEqualFilter("username", username)
+                .getFirstItem(User.class);*/
     }
 
     @Override
     public Integer getIdByName(String username) {
-        if (!StringUtils.hasText(username)) {
+        if (StringUtils.isBlank(username)) {
             return null;
         }
 
