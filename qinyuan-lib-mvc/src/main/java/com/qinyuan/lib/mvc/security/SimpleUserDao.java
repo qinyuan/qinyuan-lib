@@ -22,13 +22,11 @@ public class SimpleUserDao implements IUserDao {
 
         HibernateListBuilder listBuilder = new HibernateListBuilder();
         if (ignoreCase) {
-        //listBuilder.addFilter("LOWER(email")
+            listBuilder.addEqualFilterIgnoreCase("username", username);
         } else {
             listBuilder.addEqualFilter("username", username);
         }
         return listBuilder.getFirstItem(User.class);
-        /*return new HibernateListBuilder().addEqualFilter("username", username)
-                .getFirstItem(User.class);*/
     }
 
     @Override

@@ -4,7 +4,7 @@ import org.junit.Before;
 
 public abstract class DatabaseTestCase {
     @Before
-    public void setUp() {
+    public final void setUp() {
         new DatabaseInitializer().init();
     }
 }
