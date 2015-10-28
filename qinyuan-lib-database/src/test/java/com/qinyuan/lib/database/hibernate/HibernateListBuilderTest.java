@@ -24,6 +24,15 @@ public class HibernateListBuilderTest extends DatabaseTestCase {
         list = new HibernateListBuilder().addEqualFilter("password", "password3").buildBySQL("SELECT * FROM user");
         assertThat(list).hasSize(2);
 
+        list = new HibernateListBuilder().addEqualFilterIgnoreCase("password", "password3").buildBySQL("select * from user");
+        assertThat(list).hasSize(2);
+
+        list = new HibernateListBuilder().addEqualFilter("password", "Password3").buildBySQL("select * from user");
+        assertThat(list).isEmpty();
+
+        list = new HibernateListBuilder().addEqualFilterIgnoreCase("password", "PassWord3").buildBySQL("select * from user");
+        assertThat(list).hasSize(2);
+
         List<Integer> integers = new HibernateListBuilder().buildBySQL("SELECT id FROM user", Integer.class);
         assertThat(integers).hasSize(4);
         for (Integer integer : integers) {

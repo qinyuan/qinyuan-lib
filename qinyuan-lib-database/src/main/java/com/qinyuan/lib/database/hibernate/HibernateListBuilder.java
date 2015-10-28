@@ -40,6 +40,17 @@ public class HibernateListBuilder {
         }
     }
 
+    public HibernateListBuilder addEqualFilterIgnoreCase(String field, Object value) {
+        if (field.contains(".")) {
+            String adjustField = field.replace(".", "__");
+            conditionBuilder.addFilter("LOWER(" + field + ")=LOWER(:" + adjustField + ")");
+            return this.addArgument(adjustField, value);
+        } else {
+            conditionBuilder.addEqualFilterIgnoreCase(field);
+            return this.addArgument(field, value);
+        }
+    }
+
     public HibernateListBuilder addOrder(String field, boolean asc) {
         conditionBuilder.addOrder(field, asc);
         return this;
