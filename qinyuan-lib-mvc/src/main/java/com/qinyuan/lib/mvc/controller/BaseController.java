@@ -13,9 +13,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BaseController {
     protected final static String BLANK_PAGE = "blank";
@@ -168,13 +166,7 @@ public class BaseController {
     }
 
     public void addJavaScriptData(String key, Object value) {
-        final String mapKey = "javascriptDatas";
-        if (request.getAttribute(mapKey) == null) {
-            request.setAttribute(mapKey, new HashMap<String, String>());
-        }
-        @SuppressWarnings("unchecked")
-        Map<String, String> datas = (Map) request.getAttribute(mapKey);
-        datas.put(key, toJson(value));
+        RequestUtils.addJavaScriptData(request, key, value);
     }
 
     public void setAttribute(String key, Object value) {
@@ -182,8 +174,7 @@ public class BaseController {
     }
 
     public void setAttributeAndJavaScriptData(String key, Object value) {
-        setAttribute(key, value);
-        addJavaScriptData(key, value);
+        RequestUtils.addAttributeAndJavaScriptData(request, key, value);
     }
 
     protected String success() {
