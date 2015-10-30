@@ -95,8 +95,7 @@ public class BaseController {
     }
 
     protected boolean isMobileUserAgent() {
-        UserAgent.OS os = getUserAgentOS();
-        return os.equals(UserAgent.OS.IOS) || os.equals(UserAgent.OS.ANDROID);
+        return UserAgentUtils.isMobileUserAgent(request);
     }
 
     private UserAgent getUserAgentObject() {
