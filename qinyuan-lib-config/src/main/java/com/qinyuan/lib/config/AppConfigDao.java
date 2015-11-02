@@ -73,4 +73,21 @@ public class AppConfigDao {
             save(name, String.valueOf(value));
         }
     }
+
+    public Double getDouble(String name) {
+        String value = get(name);
+        if (value != null && NumberUtils.isNumber(value)) {
+            return Double.parseDouble(value);
+        } else {
+            return null;
+        }
+    }
+
+    public void saveDouble(String name, Integer value) {
+        if (value == null) {
+            save(name, null);
+        } else {
+            save(name, String.valueOf(value));
+        }
+    }
 }
