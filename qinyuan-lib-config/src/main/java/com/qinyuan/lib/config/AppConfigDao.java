@@ -83,7 +83,7 @@ public class AppConfigDao {
         }
     }
 
-    public void saveDouble(String name, Integer value) {
+    public void saveDouble(String name, Double value) {
         if (value == null) {
             save(name, null);
         } else {
