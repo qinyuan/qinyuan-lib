@@ -1,5 +1,7 @@
 package com.qinyuan.lib.mvc.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,26 +16,28 @@ import java.io.PrintWriter;
  */
 @Controller
 public class CKEditorUploadImageController extends ImageController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(CKEditorUploadImageController.class);
+    private final static String CKEDITOR_SAVE_DIR = "ckeditor-upload";
+
     @RequestMapping("ckeditor-image-upload")
     public void index(HttpServletResponse response,
-                      @RequestParam(value = "upload", required = true) MultipartFile upload) throws Exception {
-        PrintWriter out = response.getWriter();
+                      @RequestParam(value = "upload", required = true) MultipartFile upload) {
+        try {
+            PrintWriter out = response.getWriter();
+            //out.print("<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(1,'http://www.qin-yuan.site:9080/ckeditor-upload/DuBbHCjXJptKQYfqbETO_LIhzodegAYHZpyfWEqXH_600.PNG','')</script>");
+            if (upload.getSize() > 600 * 1024) {
+                out.print(getResultContent("", "File must not greater than 600k"));
+                return;
+            }
 
-        //String uploadContentType = request.getContentType();
-        /*Set<String> contentTypes = Sets.newHashSet("image/pjpeg", "image/jpeg", "image/png", "image/x-png", "image/gif", "image/bmp");
-        if (!contentTypes.contains(uploadContentType)) {
-            out.print(getResultContent("", "Invalid file format(must be .jpg/.gif/.bmp/.png"));
-            return;
-        }*/
-
-        if (upload.getSize() > 600 * 1024) {
-            out.print(getResultContent("", "File must not greater than 600k"));
-            return;
+            String saveFilePath = transferUploadFile(upload, CKEDITOR_SAVE_DIR);
+            String imageUrl = pathToUrl(saveFilePath);
+            out.print(getResultContent(imageUrl, ""));
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("fail to handle ckeditor image upload, file: {}, info: {}", upload, e);
+            throw new RuntimeException(e);
         }
-
-        String saveFilePath = transferUploadFile(upload, "ckeditor-upload");
-        String imageUrl = pathToUrl(saveFilePath);
-        out.print(getResultContent(imageUrl, ""));
     }
 
     private String getResultContent(String imageUrl, String prompt) {

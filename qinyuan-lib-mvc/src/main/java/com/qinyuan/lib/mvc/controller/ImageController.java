@@ -6,10 +6,10 @@ import com.qinyuan.lib.image.ThumbnailSuffix;
 import com.qinyuan.lib.lang.file.FileNameUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -94,7 +94,7 @@ public class ImageController extends BaseController {
     }
 
     private String replaceBuildInString(String path) throws IOException {
-        if (!StringUtils.hasText(path)) {
+        if (StringUtils.isBlank(path)) {
             return path;
         }
 
@@ -115,7 +115,9 @@ public class ImageController extends BaseController {
     }
 
     private boolean isLocalUrl(String url) {
-        return url.contains("://" + getLocalHost()) || url.contains("://" + getLocalAddress());
+        String imageHost = imageConfig.getHost();
+        return url.contains("://" + getLocalHost()) || url.contains("://" + getLocalAddress())
+                || (StringUtils.isNotBlank(imageHost) && url.contains(imageHost));
     }
 
     protected String getSavePath(String imageUrl, MultipartFile imageFile) throws IOException {
@@ -123,7 +125,7 @@ public class ImageController extends BaseController {
     }
 
     protected boolean isUploadFileEmpty(MultipartFile file) {
-        return file == null || !StringUtils.hasText(file.getOriginalFilename())
+        return file == null || StringUtils.isBlank(file.getOriginalFilename())
                 || file.getSize() <= 0;
     }
 
