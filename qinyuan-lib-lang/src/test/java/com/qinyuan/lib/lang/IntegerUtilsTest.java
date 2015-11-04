@@ -27,6 +27,9 @@ public class IntegerUtilsTest {
         assertThat(IntegerUtils.isPositive("-1")).isFalse();
         assertThat(IntegerUtils.isPositive("abc")).isFalse();
         assertThat(IntegerUtils.isPositive("")).isFalse();
+        assertThat(IntegerUtils.isPositive("0024123")).isTrue();
+        assertThat(IntegerUtils.isPositive("001820")).isFalse();
+        assertThat(IntegerUtils.isPositive("001821")).isFalse();
         assertThat(IntegerUtils.isPositive((String) null)).isFalse();
     }
 
