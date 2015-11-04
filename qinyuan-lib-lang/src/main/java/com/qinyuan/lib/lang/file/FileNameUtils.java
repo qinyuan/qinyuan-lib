@@ -38,4 +38,15 @@ public class FileNameUtils {
             return fileName;
         }
     }
+
+    public static String prune(String fileName, int maxLength) {
+        if (StringUtils.isEmpty(fileName)) {
+            return fileName;
+        }
+
+        if (fileName.length() > maxLength) {
+            fileName = fileName.substring(fileName.length() - maxLength, fileName.length());
+        }
+        return fileName;
+    }
 }
