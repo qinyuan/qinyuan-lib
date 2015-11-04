@@ -12,7 +12,7 @@ public class FileNameUtilsTest {
         assertThat(FileNameUtils.getAsciiFileName("hello world.txt")).isEqualTo(
                 "hello_plus_world.txt");
 
-        assertThat(FileNameUtils.getAsciiFileName("hello/world张")).isEqualTo("hello/worldpercentE5percentBCpercentA0");
+        assertThat(FileNameUtils.getAsciiFileName("hello/world张.png")).isEqualTo("hello/worldpercentE5percentBCpercentA0.png");
         assertThat(FileNameUtils.getAsciiFileName("hello\\world")).isEqualTo("hello/world");
     }
 

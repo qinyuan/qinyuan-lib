@@ -83,9 +83,6 @@ public class ImageController extends BaseController {
         String fileName = FileNameUtils.prune(uploadFile.getOriginalFilename(), MAX_FILE_NAME_LENGTH);
         filePath += savePathPrefix + RandomStringUtils.randomAlphabetic(20) + "_"
                 + FileNameUtils.getAsciiFileName(fileName);
-        if (filePath.length() > MAX_FILE_NAME_LENGTH) {
-            filePath = filePath.substring(0, MAX_FILE_NAME_LENGTH);
-        }
         File file = new File(filePath);
         File parent = file.getParentFile();
         if (!parent.isDirectory() && !parent.mkdirs()) {
