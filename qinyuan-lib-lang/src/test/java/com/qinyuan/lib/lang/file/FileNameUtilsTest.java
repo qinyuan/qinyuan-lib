@@ -11,5 +11,8 @@ public class FileNameUtilsTest {
                 "hello_plus_percentE5percentBCpercentA0percentE4percentB8percent89_plus_world.txt");
         assertThat(FileNameUtils.getAsciiFileName("hello world.txt")).isEqualTo(
                 "hello_plus_world.txt");
+
+        assertThat(FileNameUtils.getAsciiFileName("hello/world张")).isEqualTo("hello/worldpercentE5percentBCpercentA0");
+        assertThat(FileNameUtils.getAsciiFileName("hello\\world")).isEqualTo("hello/world");
     }
 }

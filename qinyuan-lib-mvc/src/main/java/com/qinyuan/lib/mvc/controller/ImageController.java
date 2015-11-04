@@ -21,6 +21,7 @@ import java.io.IOException;
  */
 public class ImageController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(ImageController.class);
+    private final static int MAX_FILE_NAME_LENGTH = 150;
 
     @Autowired
     private ImageConfig imageConfig;
@@ -79,8 +80,10 @@ public class ImageController extends BaseController {
             filePath += "/";
         }
         filePath += savePathPrefix + RandomStringUtils.randomAlphabetic(20)
-                + "_" + uploadFile.getOriginalFilename();
-        filePath = FileNameUtils.getAsciiFileName(filePath);
+                + "_" + FileNameUtils.getAsciiFileName(uploadFile.getOriginalFilename());
+        if (filePath.length() > MAX_FILE_NAME_LENGTH) {
+            filePath = filePath.substring(0, MAX_FILE_NAME_LENGTH);
+        }
         File file = new File(filePath);
         File parent = file.getParentFile();
         if (!parent.isDirectory() && !parent.mkdirs()) {
