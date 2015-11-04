@@ -46,7 +46,20 @@ public class ImageUrlAdapter {
         if (!content.endsWith("/")) {
             content += "/";
         }
-        return imageConfig.getProtocal() + "://" + localAddress + ":" + imageConfig.getPort() +
-                "/" + content;
+
+        String imageHost = imageConfig.getHost();
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(imageHost)) {
+            if (!imageHost.endsWith("/")) {
+                imageHost += "/";
+            }
+            if (imageHost.endsWith(content)) {
+                return imageHost;
+            } else {
+                return imageHost + content;
+            }
+        } else {
+            return imageConfig.getProtocal() + "://" + localAddress + ":" + imageConfig.getPort() +
+                    "/" + content;
+        }
     }
 }

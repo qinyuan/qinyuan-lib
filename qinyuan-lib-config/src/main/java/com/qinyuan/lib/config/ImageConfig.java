@@ -9,6 +9,7 @@ public class ImageConfig {
     private String protocal;
     private int port;
     private String context;
+    private String host;
 
     public String getDirectory() {
         return directory;
@@ -26,6 +27,10 @@ public class ImageConfig {
         return context;
     }
 
+    public String getHost() {
+        return host;
+    }
+
     public void setDirectory(String directory) {
         this.directory = directory;
     }
@@ -40,5 +45,9 @@ public class ImageConfig {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 }
