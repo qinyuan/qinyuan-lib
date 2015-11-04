@@ -3,6 +3,7 @@ package com.qinyuan.lib.mvc.controller;
 import com.qinyuan.lib.config.ImageConfig;
 import com.qinyuan.lib.image.ImageDownloader;
 import com.qinyuan.lib.image.ThumbnailSuffix;
+import com.qinyuan.lib.lang.file.FileNameUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
@@ -79,6 +80,7 @@ public class ImageController extends BaseController {
         }
         filePath += savePathPrefix + RandomStringUtils.randomAlphabetic(20)
                 + "_" + uploadFile.getOriginalFilename();
+        filePath = FileNameUtils.getAsciiFileName(filePath);
         File file = new File(filePath);
         File parent = file.getParentFile();
         if (!parent.isDirectory() && !parent.mkdirs()) {
