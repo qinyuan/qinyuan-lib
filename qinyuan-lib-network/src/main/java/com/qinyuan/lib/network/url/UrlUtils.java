@@ -1,5 +1,6 @@
 package com.qinyuan.lib.network.url;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,9 @@ public class UrlUtils {
     }
 
     public static String decode(String url) {
+        if (StringUtils.isEmpty(url)) {
+            return url;
+        }
         try {
             return URLDecoder.decode(url, "utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -27,6 +31,9 @@ public class UrlUtils {
     }
 
     public static String encode(String url) {
+        if (StringUtils.isEmpty(url)) {
+            return url;
+        }
         try {
             return URLEncoder.encode(url, "utf-8");
         } catch (UnsupportedEncodingException e) {

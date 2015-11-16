@@ -13,6 +13,11 @@ public class ResponseUtils {
     private ResponseUtils() {
     }
 
+    /**
+     * read local image file, then output it to client
+     * @param response http servlet response object
+     * @param imagePath local image path
+     */
     public static void outputImage(HttpServletResponse response, String imagePath) {
         try {
             File file = new File(imagePath);

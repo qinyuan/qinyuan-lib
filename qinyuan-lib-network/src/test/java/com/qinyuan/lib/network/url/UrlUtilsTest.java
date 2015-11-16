@@ -10,6 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class UrlUtilsTest {
     @Test
+    public void testEncodeUrl() {
+        assertThat(UrlUtils.encode("http://www.baidu.com")).isEqualTo("http%3A%2F%2Fwww.baidu.com");
+    }
+
+    @Test
     public void testGetHost() throws Exception {
         assertThat(UrlUtils.getHost("http://s.etao.com")).isEqualTo("http://s.etao.com");
         assertThat(UrlUtils.getHost("http://s.etao.com/")).isEqualTo("http://s.etao.com");
