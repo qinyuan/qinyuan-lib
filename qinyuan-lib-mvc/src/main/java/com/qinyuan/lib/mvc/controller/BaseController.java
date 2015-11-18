@@ -5,10 +5,12 @@ import com.google.gson.GsonBuilder;
 import com.qinyuan.lib.mvc.security.SecuritySearcher;
 import com.qinyuan.lib.mvc.security.SecurityUtils;
 import com.qinyuan.lib.network.url.UrlUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
     protected final static String BLANK_PAGE = "blank";
 
     @Autowired
@@ -31,7 +34,13 @@ public class BaseController {
     protected AuthenticationManager authenticationManager;
 
     protected void login(String username, String password) {
-        SecurityUtils.login(request, authenticationManager, username, password);
+        if (StringUtils.isBlank(username)) {
+            LOGGER.error("username is blank: {}", username);
+        } else if (StringUtils.isBlank(password)) {
+            LOGGER.error("password is blank: {}", password);
+        } else {
+            SecurityUtils.login(request, authenticationManager, username, password);
+        }
     }
 
     protected String redirect(String page) {
@@ -64,7 +73,7 @@ public class BaseController {
     }
 
     protected String[] getParameters(String name) {
-        if (!StringUtils.hasText(name)) {
+        if (StringUtils.isBlank(name)) {
             return null;
         }
 
@@ -198,13 +207,13 @@ public class BaseController {
     }
 
     protected boolean validateIdentityCode(String identityCode) {
-        if (!StringUtils.hasText(identityCode)) {
+        if (StringUtils.isBlank(identityCode)) {
             return false;
         }
 
         String identityCodeInSession = (String) session.getAttribute(IdentityCodeController.IDENTITY_CODE_SESSION_KEY);
 
-        return StringUtils.hasText(identityCodeInSession) &&
+        return StringUtils.isNotBlank(identityCodeInSession) &&
                 identityCode.toLowerCase().equals(identityCodeInSession.toLowerCase());
     }
 
