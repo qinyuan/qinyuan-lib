@@ -1,5 +1,6 @@
 package com.qinyuan.lib.contact.mail;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,11 @@ public class MailAddressValidator {
     private final static Logger LOGGER = LoggerFactory.getLogger(MailAddressValidator.class);
 
     public boolean validate(String mailAddress) {
+        if (StringUtils.isBlank(mailAddress)) {
+            LOGGER.error("mailAddress is blank: {}", mailAddress);
+            return false;
+        }
+
         try {
             String check = "^[a-zA-Z0-9_\\-\\.]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
             Pattern regex = Pattern.compile(check);
