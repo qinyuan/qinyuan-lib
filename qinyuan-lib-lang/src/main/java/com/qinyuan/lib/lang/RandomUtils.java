@@ -12,9 +12,18 @@ public class RandomUtils {
     private RandomUtils() {
     }
 
+    /**
+     * create sub list by fetching elements of certain list randomly
+     *
+     * @param list parent list to generate sub list
+     * @param size length of sub list
+     * @param <T>  type of list element
+     * @return sub list
+     */
     public static <T> List<T> subList(List<? extends T> list, int size) {
         if (size > list.size()) {
-            return new ArrayList<>(list);
+            throw new IllegalArgumentException("sub list size can't be greater than parent list size, "
+                    + "parent list size is " + list.size() + " but sub list size is " + size);
         }
 
         List<T> newList = new ArrayList<>();

@@ -25,6 +25,13 @@ public class RandomUtilsTest {
             set.addAll(subList);
         }
         assertThat(set).hasSameSizeAs(list);
+
+        try {
+            RandomUtils.subList(list, list.size() + 1);
+            fail("there should be exception thrown here");
+        } catch (Exception e) {
+            // nothing to do
+        }
     }
 
     @Test
