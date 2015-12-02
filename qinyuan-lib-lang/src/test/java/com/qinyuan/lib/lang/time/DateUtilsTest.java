@@ -1,6 +1,5 @@
 package com.qinyuan.lib.lang.time;
 
-import com.qinyuan.lib.lang.time.DateUtils;
 import org.junit.Test;
 
 import java.sql.Date;
@@ -136,6 +135,11 @@ public class DateUtilsTest {
     @Test
     public void testOneYearLater() {
         System.out.println(DateUtils.toLongString(DateUtils.oneYearLater()));
+    }
+
+    @Test
+    public void testONeYearAgo() {
+        System.out.println(DateUtils.toLongString(DateUtils.oneYearAgo()));
     }
 
     @Test

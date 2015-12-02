@@ -195,6 +195,12 @@ public class DateUtils {
         return new Date(cal.getTimeInMillis());
     }
 
+    public static Date oneYearAgo() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -1);
+        return new Date(cal.getTimeInMillis());
+    }
+
     /**
      * Delete the  milli second part of date
      * <p>
