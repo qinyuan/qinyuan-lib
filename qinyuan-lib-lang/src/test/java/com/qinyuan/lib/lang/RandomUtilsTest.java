@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 /**
  * Test RandomUtils
@@ -31,8 +32,12 @@ public class RandomUtilsTest {
         List<Integer> integers = RandomUtils.nextIntegers(1, 3, 3);
         assertThat(integers).containsExactly(1, 2, 3);
 
-        integers = RandomUtils.nextIntegers(1, 3, 4);
-        assertThat(integers).containsExactly(1, 2, 3);
+        try {
+            RandomUtils.nextIntegers(1, 3, 4);
+            fail("there should be exception thrown here");
+        } catch (Exception e) {
+            // nothing to do
+        }
 
         Set<Integer> integerSet = new HashSet<>();
         for (int i = 0; i < 5; i++) {
