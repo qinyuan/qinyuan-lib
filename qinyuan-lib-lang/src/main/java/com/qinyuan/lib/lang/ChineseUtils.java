@@ -104,4 +104,20 @@ public class ChineseUtils {
             throw new RuntimeException("unrecognised Chinese character: " + chineseChar);
         return result;
     }
+
+    public static int getChineseStringLength(String string) {
+        if (string == null) {
+            return 0;
+        }
+
+        int len = 0;
+        for (int i = 0; i < string.length(); i++) {
+            if (string.codePointAt(i) > 127) {
+                len += 2;
+            } else {
+                len++;
+            }
+        }
+        return len;
+    }
 }
