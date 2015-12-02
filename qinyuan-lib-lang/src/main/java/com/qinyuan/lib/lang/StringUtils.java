@@ -9,7 +9,10 @@ public class StringUtils {
     }
 
     public static String replaceFirst(String string, String from, String to) {
-        if (string == null || string.isEmpty()) {
+        if (to == null) {
+            to = "";
+        }
+        if (string == null || string.isEmpty() || from == null || from.isEmpty()) {
             return string;
         }
 
