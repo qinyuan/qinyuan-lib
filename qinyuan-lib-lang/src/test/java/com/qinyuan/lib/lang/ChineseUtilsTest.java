@@ -23,4 +23,13 @@ public class ChineseUtilsTest {
         result = ChineseUtils.getPhoneticLetter(testString);
         assertThat(result).isEqualTo("GAP");
     }
+
+    @Test
+    public void testGetChineseStringLength() {
+        assertThat(ChineseUtils.getChineseStringLength("中国")).isEqualTo(4);
+        assertThat(ChineseUtils.getChineseStringLength("Hello")).isEqualTo(5);
+        assertThat(ChineseUtils.getChineseStringLength("HELLO")).isEqualTo(5);
+        assertThat(ChineseUtils.getChineseStringLength("hello, 中国")).isEqualTo(11);
+        assertThat(ChineseUtils.getChineseStringLength(null)).isEqualTo(0);
+    }
 }

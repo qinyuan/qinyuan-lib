@@ -29,4 +29,13 @@ public class StringUtils {
             return string.substring(0, index) + to + string.substring(index + from.length());
         }
     }
+
+    public static boolean containsOnlyAscii(String string) {
+        for (int i = 0; i < string.length(); i++) {
+            if (string.codePointAt(i) > 127) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

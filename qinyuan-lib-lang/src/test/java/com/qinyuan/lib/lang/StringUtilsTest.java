@@ -1,5 +1,6 @@
 package com.qinyuan.lib.lang;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,11 +29,14 @@ public class StringUtilsTest {
     }
 
     @Test
-    public void testGetChineseStringLength() {
-        assertThat(StringUtils.getChineseStringLength("中国")).isEqualTo(4);
-        assertThat(StringUtils.getChineseStringLength("Hello")).isEqualTo(5);
-        assertThat(StringUtils.getChineseStringLength("HELLO")).isEqualTo(5);
-        assertThat(StringUtils.getChineseStringLength("hello, 中国")).isEqualTo(11);
-        assertThat(StringUtils.getChineseStringLength(null)).isEqualTo(0);
+    public void testContainsOnlyAscii() {
+        assertThat(StringUtils.containsOnlyAscii("abc123A_i")).isTrue();
+        assertThat(StringUtils.containsOnlyAscii(RandomStringUtils.randomAlphabetic(100))).isTrue();
+        assertThat(StringUtils.containsOnlyAscii(RandomStringUtils.randomAlphanumeric(100))).isTrue();
+        assertThat(StringUtils.containsOnlyAscii(RandomStringUtils.randomAscii(100))).isTrue();
+
+        assertThat(StringUtils.containsOnlyAscii("张三")).isFalse();
+        assertThat(StringUtils.containsOnlyAscii(RandomStringUtils.random(100))).isFalse();
     }
+
 }
