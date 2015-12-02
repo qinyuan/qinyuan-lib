@@ -1,6 +1,7 @@
 package com.qinyuan.lib.network.http;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -81,6 +82,12 @@ public class HttpClient {
     }
 
     public HttpResponse get(String url) {
+        if (StringUtils.isBlank(url)) {
+            throw new IllegalArgumentException("blank url: " + url);
+        }
+
+        url = url.trim();
+
         try {
             long startTime = System.currentTimeMillis();
             CloseableHttpResponse response = this.getResponse(url);
