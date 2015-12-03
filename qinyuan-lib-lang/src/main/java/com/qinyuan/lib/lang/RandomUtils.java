@@ -1,7 +1,5 @@
 package com.qinyuan.lib.lang;
 
-import com.google.common.collect.Lists;
-
 import java.util.*;
 
 /**
@@ -15,22 +13,31 @@ public class RandomUtils {
     /**
      * create sub list by fetching elements of certain list randomly
      *
-     * @param list parent list to generate sub list
-     * @param size length of sub list
-     * @param <T>  type of list element
+     * @param list       parent list to generate sub list
+     * @param size       length of sub list
+     * @param repeatable whether each element can be fetched more than twice
+     * @param sorted     whether order of subList is the same as parent list
+     * @param <T>        type of list element
      * @return sub list
      */
-    public static <T> List<T> subList(List<? extends T> list, int size) {
-        if (size > list.size()) {
-            throw new IllegalArgumentException("sub list size can't be greater than parent list size, "
-                    + "parent list size is " + list.size() + " but sub list size is " + size);
+    public static <T> List<T> subList(List<? extends T> list, int size, boolean repeatable, boolean sorted) {
+        if (!repeatable && size > list.size()) {
+            throw new IllegalArgumentException(
+                    "sub list size can't be greater than parent list size if not repeatable, "
+                            + "parent list size is " + list.size() + " but sub list size is " + size
+            );
         }
 
         List<T> newList = new ArrayList<>();
-        for (int i : nextIntegers(0, list.size() - 1, size)) {
+        for (int i : nextIntegers(0, list.size() - 1, size, repeatable, sorted)) {
             newList.add(list.get(i));
         }
         return newList;
+    }
+
+
+    public static <T> List<T> subList(List<? extends T> list, int size) {
+        return subList(list, size, false, true);
     }
 
     /**
@@ -49,12 +56,8 @@ public class RandomUtils {
             upperBound = temp;
         }
 
-        Collection<Integer> collection;
-        if (repeatable) {
-            collection = new ArrayList<>();
-        } else {
-            collection = sorted ? new TreeSet<Integer>() : new HashSet<Integer>();
-        }
+        List<Integer> integers = new ArrayList<>();
+        Set<Integer> integerRecords = new HashSet<>();
 
         Random rand = new Random();
         int range = upperBound - lowerBound + 1;
@@ -64,18 +67,25 @@ public class RandomUtils {
                     "it's impossible to create unrepeatable list when bound range is less than size");
         }
 
-        while (collection.size() < size) {
-            collection.add(lowerBound + rand.nextInt(range));
+        while (integers.size() < size) {
+            int next = lowerBound + rand.nextInt(range);
+
+            if (!repeatable) {
+                if (integerRecords.contains(next)) {
+                    continue;
+                } else {
+                    integerRecords.add(next);
+                }
+            }
+
+            integers.add(next);
         }
 
-        if (collection instanceof List) {
-            @SuppressWarnings("unchecked")
-            List<Integer> list = (List) collection;
-            Collections.sort(list);
-            return list;
-        } else {
-            return Lists.newArrayList(collection);
+        if (sorted) {
+            Collections.sort(integers);
         }
+
+        return integers;
     }
 
     public static List<Integer> nextIntegers(int lowerBound, int upperBound, int size) {

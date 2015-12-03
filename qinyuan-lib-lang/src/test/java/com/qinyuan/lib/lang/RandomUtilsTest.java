@@ -18,9 +18,10 @@ public class RandomUtilsTest {
     @Test
     public void testSubList() {
         List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6);
+        List<Integer> subList;
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < 10; i++) {
-            List<Integer> subList = RandomUtils.subList(list, 3);
+            subList = RandomUtils.subList(list, 3);
             assertThat(subList).hasSize(3);
             set.addAll(subList);
         }
@@ -32,6 +33,20 @@ public class RandomUtilsTest {
         } catch (Exception e) {
             // nothing to do
         }
+
+        for (int i = 0; i < 5; i++) {
+            subList = RandomUtils.subList(list, list.size(), false, false);
+            assertThat(subList).hasSameSizeAs(list).containsAll(list).isNotEqualTo(list);
+
+            subList = RandomUtils.subList(list, list.size(), false, true);
+            assertThat(subList).isEqualTo(list);
+        }
+
+        subList = RandomUtils.subList(list, list.size() + 1, true, true);
+        System.out.println("ordered repeatable subList: " + subList);
+
+        subList = RandomUtils.subList(list, list.size() + 1, true, false);
+        System.out.println("unordered repeatable subList: " + subList);
     }
 
     @Test
@@ -47,11 +62,43 @@ public class RandomUtilsTest {
         }
 
         Set<Integer> integerSet = new HashSet<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             integers = RandomUtils.nextIntegers(1, 5, 3);
             assertThat(integers).hasSize(3);
             integerSet.addAll(integers);
         }
         assertThat(integerSet).hasSize(5);
+
+        System.out.print("unrepeatable unsorted integers: ");
+        IterationUtils.repeat(4, new IterationUtils.Repeatable() {
+            @Override
+            public void run() {
+                System.out.print(RandomUtils.nextIntegers(1, 5, 3, false, false) + " ");
+            }
+        });
+
+        System.out.print("\nrepeatable unsorted integers: ");
+        IterationUtils.repeat(4, new IterationUtils.Repeatable() {
+            @Override
+            public void run() {
+                System.out.print(RandomUtils.nextIntegers(1, 5, 3, true, false) + " ");
+            }
+        });
+
+        System.out.print("\nunrepeatable sorted integers: ");
+        IterationUtils.repeat(4, new IterationUtils.Repeatable() {
+            @Override
+            public void run() {
+                System.out.print(RandomUtils.nextIntegers(1, 5, 3, false, true) + " ");
+            }
+        });
+
+        System.out.print("\nrepeatable sorted integers: ");
+        IterationUtils.repeat(4, new IterationUtils.Repeatable() {
+            @Override
+            public void run() {
+                System.out.print(RandomUtils.nextIntegers(1, 5, 3, true, true) + " ");
+            }
+        });
     }
 }
