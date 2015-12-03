@@ -11,6 +11,17 @@ public class RandomUtils {
     }
 
     /**
+     * disorganize order of certain list randomly
+     *
+     * @param list list to disorganize order
+     * @param <T>  type of list element
+     * @return list whose order is disorganized
+     */
+    public static <T> List<T> disorganizeOrder(List<? extends T> list) {
+        return subList(list, list.size(), false, false);
+    }
+
+    /**
      * create sub list by fetching elements of certain list randomly
      *
      * @param list       parent list to generate sub list

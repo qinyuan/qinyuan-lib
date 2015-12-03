@@ -15,6 +15,16 @@ import static org.assertj.core.api.Assertions.fail;
  * Created by qinyuan on 15-4-4.
  */
 public class RandomUtilsTest {
+
+    @Test
+    public void testDisorganizeOrder() {
+        List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6);
+        for (int i = 0; i < 10; i++) {
+            assertThat(RandomUtils.disorganizeOrder(list)).hasSameSizeAs(list).containsAll(list).isNotEqualTo(list);
+        }
+        System.out.println(RandomUtils.disorganizeOrder(list));
+    }
+
     @Test
     public void testSubList() {
         List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6);
