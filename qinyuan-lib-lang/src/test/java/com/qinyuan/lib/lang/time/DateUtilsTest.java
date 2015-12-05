@@ -148,6 +148,11 @@ public class DateUtilsTest {
     }
 
     @Test
+    public void testOneDayAgo() {
+        System.out.println(DateUtils.toLongString(DateUtils.oneDayAgo()));
+    }
+
+    @Test
     public void testGetDatePart() throws Exception {
         assertThat(DateUtils.getDatePart("2012-12-12 10:10:10")).isEqualTo("2012-12-12");
     }
