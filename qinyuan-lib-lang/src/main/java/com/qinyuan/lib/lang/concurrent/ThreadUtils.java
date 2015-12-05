@@ -21,6 +21,11 @@ public class ThreadUtils {
         if (millSecond < 0) {
             millSecond = -millSecond;
         }
+
+        if (millSecond == 0) {
+            return;
+        }
+
         try {
             Thread.sleep(millSecond);
         } catch (Exception e) {
