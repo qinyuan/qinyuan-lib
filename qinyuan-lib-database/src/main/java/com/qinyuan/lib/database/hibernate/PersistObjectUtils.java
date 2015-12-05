@@ -33,7 +33,7 @@ public class PersistObjectUtils {
 
     /**
      * Get IDs of each persistObject of persistObject list,
-     * then join them as a string
+     * then join them as a string, return result such as '1,3,5,7,9'
      *
      * @param persistObjects persistObject list
      * @return a string containing IDs of element in persistObject list
