@@ -11,6 +11,17 @@ public class RandomUtils {
     }
 
     /**
+     * Get one instance from list randomly
+     *
+     * @param list list to fetch element
+     * @param <T>  type of list element
+     * @return one element of list
+     */
+    public static <T> T getOne(List<? extends T> list) {
+        return list.get(new Random().nextInt(list.size()));
+    }
+
+    /**
      * disorganize order of certain list randomly
      *
      * @param list list to disorganize order

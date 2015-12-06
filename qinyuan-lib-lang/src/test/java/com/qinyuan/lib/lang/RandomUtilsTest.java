@@ -17,6 +17,16 @@ import static org.assertj.core.api.Assertions.fail;
 public class RandomUtilsTest {
 
     @Test
+    public void testGetOne() {
+        List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5);
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < 100; i++) {
+            set.add(RandomUtils.getOne(list));
+        }
+        assertThat(set).containsAll(list).hasSameSizeAs(list);
+    }
+
+    @Test
     public void testDisorganizeOrder() {
         List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6);
         for (int i = 0; i < 10; i++) {
