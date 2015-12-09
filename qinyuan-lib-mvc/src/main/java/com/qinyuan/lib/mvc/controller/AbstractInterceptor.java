@@ -9,14 +9,13 @@ public abstract class AbstractInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        return !isInvalidRequest(request);
+        return true;
     }
 
     protected boolean isRequestToResources(HttpServletRequest request) {
         String uri = request.getRequestURI();
         return uri.contains("/resources/css/") || uri.contains("/resources/js/");
     }
-
 
 
     @Override
