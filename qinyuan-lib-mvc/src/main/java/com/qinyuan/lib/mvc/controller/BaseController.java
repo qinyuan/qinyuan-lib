@@ -51,6 +51,15 @@ public class BaseController {
         return redirect(addErrorInfoParameter(page, errorInfo));
     }
 
+    protected String getFullRequestURI() {
+        String uri = request.getRequestURI();
+        String queryString = request.getQueryString();
+        if (StringUtils.isNotBlank(queryString)) {
+            uri = "?" + queryString;
+        }
+        return uri;
+    }
+
     private String addErrorInfoParameter(String url, String errorInfo) {
         if (url.contains("?")) {
             url += "&";
