@@ -55,7 +55,7 @@ public class BaseController {
         String uri = request.getRequestURI();
         String queryString = request.getQueryString();
         if (StringUtils.isNotBlank(queryString)) {
-            uri = "?" + queryString;
+            uri += "?" + queryString;
         }
         return uri;
     }
