@@ -10,6 +10,15 @@ import java.io.PrintWriter;
 public class RobotController {
     @RequestMapping("robot.txt")
     public void index(HttpServletResponse response) {
+        printRobot(response);
+    }
+
+    @RequestMapping("robots.txt")
+    public void index2(HttpServletResponse response) {
+        printRobot(response);
+    }
+
+    private void printRobot(HttpServletResponse response) {
         try {
             PrintWriter out = response.getWriter();
             out.print("User-agent: *\nDisallow:");
