@@ -196,15 +196,15 @@ public class BaseController {
     }
 
     protected String success() {
-        return toJson(JsonResultBuilder.build(true, null));
+        return toJson(JsonResult.build(true, null));
     }
 
     protected String success(String detail) {
-        return toJson(JsonResultBuilder.build(true, detail));
+        return toJson(JsonResult.build(true, detail));
     }
 
     protected String fail(String info) {
-        return toJson(JsonResultBuilder.build(false, info));
+        return toJson(JsonResult.build(false, info));
     }
 
     protected String failByDatabaseError() {
