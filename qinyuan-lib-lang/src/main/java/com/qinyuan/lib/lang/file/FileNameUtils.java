@@ -34,7 +34,7 @@ public class FileNameUtils {
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
-            fileName = fileName.replace("+", "_ps_").replace("%", "_pc_");
+            fileName = fileName.replace("+", "_ps_").replace("%", "_p_");
             return fileName;
         }
     }

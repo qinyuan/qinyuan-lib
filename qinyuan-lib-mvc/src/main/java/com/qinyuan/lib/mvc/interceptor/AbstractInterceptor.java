@@ -1,4 +1,4 @@
-package com.qinyuan.lib.mvc.controller;
+package com.qinyuan.lib.mvc.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
