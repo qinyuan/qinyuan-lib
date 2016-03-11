@@ -15,7 +15,11 @@ public class VisitorRecorder {
         this.size = size;
     }
 
-    public synchronized void add(VisitRecord visitRecord) {
+    public void add(String ip, String time, String userAgent, String url) {
+        add(new VisitRecord(ip, time, userAgent, url));
+    }
+
+    private synchronized void add(VisitRecord visitRecord) {
         records.add(visitRecord);
         while (records.size() > 0 && records.size() > size) {
             records.poll();

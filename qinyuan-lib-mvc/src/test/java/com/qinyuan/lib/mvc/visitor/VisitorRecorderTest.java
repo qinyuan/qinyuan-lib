@@ -23,8 +23,7 @@ public class VisitorRecorderTest {
         String time = DateUtils.nowString();
         String userAgent = "Firefox";
         String url = "test.html";
-        VisitRecord visitRecord = new VisitRecord(ip, time, userAgent, url);
-        visitorRecorder.add(visitRecord);
+        visitorRecorder.add(ip, time, userAgent, url);
         assertThat(visitorRecorder.getRecords()).hasSize(1);
 
         // test if getRecords() method returns duplication
