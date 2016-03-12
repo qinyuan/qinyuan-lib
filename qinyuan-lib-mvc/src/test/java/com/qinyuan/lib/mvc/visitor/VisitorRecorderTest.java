@@ -29,5 +29,15 @@ public class VisitorRecorderTest {
         // test if getRecords() method returns duplication
         visitorRecorder.getRecords().clear();
         assertThat(visitorRecorder.getRecords()).hasSize(1);
+
+        // test order
+        ip = "192.168.8.2";
+        time = DateUtils.nowString();
+        userAgent = "Google Chrome";
+        url = "hello.json";
+        visitorRecorder.add(ip, time, userAgent, url);
+        assertThat(visitorRecorder.getRecords()).hasSize(2);
+        assertThat(visitorRecorder.getRecords().get(0).getIp()).isEqualTo("192.168.8.2");
+        assertThat(visitorRecorder.getRecords().get(1).getIp()).isEqualTo("192.168.8.1");
     }
 }

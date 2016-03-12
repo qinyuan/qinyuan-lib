@@ -2,6 +2,7 @@ package com.qinyuan.lib.mvc.visitor;
 
 import com.google.common.collect.Lists;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -27,6 +28,8 @@ public class VisitorRecorder {
     }
 
     public List<VisitRecord> getRecords() {
-        return Lists.newArrayList(records);
+        List<VisitRecord> result = Lists.newArrayList(records);
+        Collections.reverse(result);
+        return result;
     }
 }
