@@ -20,7 +20,7 @@ public class TimingVisitor {
         this.pages = pages;
     }
 
-    public void run() {
+    public void init() {
         (new Thread() {
             @Override
             public void run() {

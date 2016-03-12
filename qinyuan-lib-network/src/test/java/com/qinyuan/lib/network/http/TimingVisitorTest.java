@@ -9,7 +9,7 @@ public class TimingVisitorTest {
         TimingVisitor visitor = new TimingVisitor();
         visitor.setPages("http://www.bud-vip.com/commodity.html,http://www.bud-vip.com/index.html");
         visitor.setInterval(1);
-        visitor.run();
+        visitor.init();
         ThreadUtils.sleep(10);
     }
 }
