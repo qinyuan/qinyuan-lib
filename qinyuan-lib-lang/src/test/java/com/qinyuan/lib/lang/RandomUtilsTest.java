@@ -3,9 +3,7 @@ package com.qinyuan.lib.lang;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -18,6 +16,8 @@ public class RandomUtilsTest {
 
     @Test
     public void testGetOne() {
+        assertThat(RandomUtils.getOne(new ArrayList())).isNull();
+
         List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5);
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < 100; i++) {
@@ -33,6 +33,55 @@ public class RandomUtilsTest {
             assertThat(RandomUtils.disorganizeOrder(list)).hasSameSizeAs(list).containsAll(list).isNotEqualTo(list);
         }
         System.out.println(RandomUtils.disorganizeOrder(list));
+    }
+
+    @Test
+    public void testGetOneKey() {
+        Map<String, String> map = new HashMap<>();
+        assertThat(RandomUtils.getOneKey(map)).isNull();
+
+        map.put("key1", "value1");
+        map.put("key2", "value2");
+        map.put("key3", "value3");
+
+        Set<String> set = new HashSet<>();
+
+        for (int i = 0; i < 100; i++) {
+            set.add(RandomUtils.getOneKey(map));
+        }
+        Set<String> keySet = map.keySet();
+        assertThat(keySet).containsAll(set);
+        assertThat(set).containsAll(keySet);
+    }
+
+    @Test
+    public void testRemoveOne() {
+        Map<String, String> map = new HashMap<>();
+        map.put("key1", "value1");
+        map.put("key2", "value2");
+        map.put("Key3", "value3");
+
+        RandomUtils.removeOne(map);
+        assertThat(map).hasSize(2);
+        System.out.println(map);
+
+        RandomUtils.removeOne(map);
+        assertThat(map).hasSize(1);
+        System.out.println(map);
+
+        RandomUtils.removeOne(map);
+        assertThat(map).isEmpty();
+        System.out.println(map);
+
+        RandomUtils.removeOne(map);
+        assertThat(map).isEmpty();
+        System.out.println(map);
+
+        map = new HashMap<>();
+        map.put(null, "value");
+        System.out.println(map.size());
+        RandomUtils.removeOne(map);
+        System.out.println(map.size());
     }
 
     @Test

@@ -1,5 +1,9 @@
 package com.qinyuan.lib.lang;
 
+import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 /**
@@ -7,6 +11,8 @@ import java.util.*;
  * Created by qinyuan on 15-4-4.
  */
 public class RandomUtils {
+    private final static Logger LOGGER = LoggerFactory.getLogger(RandomUtils.class);
+
     private RandomUtils() {
     }
 
@@ -18,7 +24,35 @@ public class RandomUtils {
      * @return one element of list
      */
     public static <T> T getOne(List<? extends T> list) {
+        if (list.isEmpty()) {
+            LOGGER.warn("list is empty");
+            return null;
+        }
         return list.get(new Random().nextInt(list.size()));
+    }
+
+    /**
+     * Get one key from map randomly
+     *
+     * @param map map to fetch key
+     * @param <T> type of key
+     * @return one key in map
+     */
+    public static <T> T getOneKey(Map<? extends T, ?> map) {
+        if (map.isEmpty()) {
+            LOGGER.warn("map is empty");
+            return null;
+        }
+        return getOne(Lists.newArrayList(map.keySet()));
+    }
+
+    /**
+     * remove one key value pair from map randomly
+     *
+     * @param map map to remove element
+     */
+    public static void removeOne(Map<?, ?> map) {
+        MapUtils.removeQuietly(map, getOneKey(map));
     }
 
     /**
