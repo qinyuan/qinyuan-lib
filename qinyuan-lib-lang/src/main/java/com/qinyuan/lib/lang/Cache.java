@@ -40,7 +40,7 @@ public class Cache {
         return map.size();
     }
 
-    private void addValue(String key, Object value) {
+    public void addValue(String key, Object value) {
         while (map.size() >= size) {
             MapUtils.removeFirst(map);
         }
