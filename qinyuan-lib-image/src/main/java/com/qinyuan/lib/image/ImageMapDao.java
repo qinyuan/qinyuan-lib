@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by qinyuan on 15-6-27.
  */
 public class ImageMapDao {
-    private final String relateType;
+    protected final String relateType;
 
     public ImageMapDao(String relateType) {
         this.relateType = relateType;
