@@ -3,15 +3,15 @@ package com.qinyuan.lib.lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Cache {
     private final static Logger LOGGER = LoggerFactory.getLogger(Cache.class);
 
     public final static int DEFAULT_SIZE = 100000;
     private int size = DEFAULT_SIZE;
-    private Map<String, Object> map = new HashMap<>();
+    private Map<String, Object> map = new ConcurrentHashMap<>();
 
     public void setSize(int size) {
         this.size = size;
