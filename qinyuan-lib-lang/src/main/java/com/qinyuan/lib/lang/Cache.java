@@ -51,6 +51,10 @@ public class Cache {
         MapUtils.removeQuietly(map, key);
     }
 
+    public void deleteAll() {
+        map.clear();
+    }
+
     public interface Source {
         Object getValue();
     }

@@ -67,4 +67,24 @@ public class CacheTest {
         cache.deleteValue("hello");
         assertThat(cache.getUsedSize()).isEqualTo(4);
     }
+
+    @Test
+    public void testDeleteAll() {
+        cache.deleteAll();
+        assertThat(cache.getUsedSize()).isZero();
+
+        for (int i = 0; i < 5; i++) {
+            final int value = i;
+            cache.getValue("key" + value, new Cache.Source() {
+                @Override
+                public Object getValue() {
+                    return ("value" + value);
+                }
+            });
+        }
+
+        assertThat(cache.getUsedSize()).isEqualTo(5);
+        cache.deleteAll();
+        assertThat(cache.getUsedSize()).isZero();
+    }
 }
