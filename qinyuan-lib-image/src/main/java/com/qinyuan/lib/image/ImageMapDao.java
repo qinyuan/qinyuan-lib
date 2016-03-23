@@ -36,16 +36,16 @@ public class ImageMapDao {
 
     public ImageMap getInstance(Integer id) {
         ImageMap imageMap = HibernateUtils.get(ImageMap.class, id);
-        if (imageMap.getRelateType().equals(relateType)) {
-            return imageMap;
-        } else {
-            return null;
-        }
+        return isTypeCorrect(imageMap) ? imageMap : null;
+    }
+
+    private boolean isTypeCorrect(ImageMap map) {
+        return map != null && map.getRelateType().equals(relateType);
     }
 
     public void update(Integer id, String href, String comment) {
         ImageMap map = getInstance(id);
-        if (map != null) {
+        if (isTypeCorrect(map)) {
             map.setHref(href);
             map.setComment(comment);
             HibernateUtils.update(map);
@@ -53,24 +53,23 @@ public class ImageMapDao {
     }
 
     private HibernateDeleter newHibernateDeleter() {
-        return new HibernateDeleter().addFilter("relateType=:relateType").addArgument("relateType", relateType);
+        return new HibernateDeleter().addEqualFilter("relateType", relateType);
     }
 
     public void delete(Integer id) {
-        newHibernateDeleter().addFilter("id=:id").addArgument("id", id).delete(ImageMap.class);
+        newHibernateDeleter().addEqualFilter("id", id).delete(ImageMap.class);
     }
 
     public void deleteByRelateId(Integer relateId) {
-        newHibernateDeleter().addFilter("relateId=:relateId").addArgument("relateId", relateId)
-                .delete(ImageMap.class);
+        newHibernateDeleter().addEqualFilter("relateId", relateId).delete(ImageMap.class);
     }
 
     private HibernateListBuilder newHibernateListBuilder() {
-        return new HibernateListBuilder().addFilter("relateType=:relateType").addArgument("relateType", relateType);
+        return new HibernateListBuilder().addEqualFilter("relateType", relateType);
     }
 
     public List<ImageMap> getInstancesByRelateId(Integer relateId) {
-        return newHibernateListBuilder().addFilter("relateId=:relateId").addArgument("relateId", relateId)
+        return newHibernateListBuilder().addEqualFilter("relateId", relateId)
                 .addOrder("id", true).build(ImageMap.class);
     }
 
