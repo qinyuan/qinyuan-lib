@@ -35,11 +35,11 @@ public class AppConfigDao {
 
     public Boolean getBoolean(String name) {
         String booleanString = get(name);
-        if (booleanString == null) {
-            return null;
-        } else {
-            return Boolean.parseBoolean(booleanString);
-        }
+        return booleanString == null ? null : Boolean.parseBoolean(booleanString);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(NumberUtils.isNumber(null));
     }
 
     public void saveBoolean(String name, Boolean value) {
@@ -54,11 +54,7 @@ public class AppConfigDao {
 
     public Integer getInteger(String name) {
         String value = get(name);
-        if (value != null && NumberUtils.isNumber(value)) {
-            return Integer.parseInt(value);
-        } else {
-            return null;
-        }
+        return NumberUtils.isNumber(value) ? Integer.parseInt(value) : null;
     }
 
     public Integer getPositiveInteger(String name) {
@@ -76,11 +72,7 @@ public class AppConfigDao {
 
     public Double getDouble(String name) {
         String value = get(name);
-        if (value != null && NumberUtils.isNumber(value)) {
-            return Double.parseDouble(value);
-        } else {
-            return null;
-        }
+        return NumberUtils.isNumber(value) ? Double.parseDouble(value) : null;
     }
 
     public void saveDouble(String name, Double value) {
