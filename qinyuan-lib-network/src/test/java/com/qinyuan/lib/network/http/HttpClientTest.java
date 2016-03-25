@@ -4,32 +4,29 @@ import com.qinyuan.lib.lang.test.TestFileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class HttpClientTest {
     private HttpClient client;
-    //private ProxyPool proxyPool;
-    private String url = "http://s.etao.com/detail/8573171861127423250.html";
-    //private String url = "http://www.baidu.com";
-    //private String url = "http://localhost/test/test.php";
+    private String url = "http://localhost/test/test.php";
 
     @Before
     public void setUp() throws Exception {
         client = new HttpClient();
-        //proxyPool = new TestProxyPool();
-        /*
-        Proxy proxy = new Proxy();
-        proxy.setHost("183.207.228.119");
-        proxy.setPort(84);
-        client.setProxy(proxy);
-        */
-        //client.setProxy(proxyPool.next());
     }
 
     @Test
     public void testGetContent() throws Exception {
-        //String result = client.getContent(url);
-        //System.out.println(result);
-        //assertThat(result).contains("百度一下");
-        System.out.println(client.get(url));
+        System.out.println(client.getContent(url));
+
+        Map<String, String> params = new HashMap<>();
+        params.put("hello", "world");
+        params.put("hello2", "world2");
+        System.out.println(client.getContent(url, params));
+
+        client.setMethod(HttpClient.Method.POST);
+        System.out.println(client.getContent(url, params));
     }
 
     @Test

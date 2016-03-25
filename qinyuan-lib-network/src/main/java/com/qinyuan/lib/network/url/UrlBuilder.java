@@ -2,6 +2,7 @@ package com.qinyuan.lib.network.url;
 
 import com.google.common.base.Joiner;
 import com.qinyuan.lib.lang.IntegerUtils;
+import com.qinyuan.lib.lang.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,13 @@ public class UrlBuilder {
 
     public UrlBuilder addParam(String key, Object value) {
         params.put(key, value);
+        return this;
+    }
+
+    public UrlBuilder addParams(Map<String, ?> params) {
+        if (MapUtils.isNotEmpty(params)) {
+            this.params.putAll(params);
+        }
         return this;
     }
 

@@ -44,4 +44,8 @@ public class MapUtils {
             LOGGER.warn("error in removing map element: {}", e);
         }
     }
+
+    public static boolean isNotEmpty(Map<?, ?> map) {
+        return map != null && !map.isEmpty();
+    }
 }
