@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Utility class about url
@@ -56,5 +58,26 @@ public class UrlUtils {
         } else {
             return url;
         }
+    }
+
+    public static Map<String, String> parseParameters(String url) {
+        Map<String, String> map = new HashMap<>();
+        if (StringUtils.isBlank(url) || !url.contains("?")) {
+            return map;
+        }
+
+        url = url.replaceAll("^.*\\?", "");
+        String[] keyValues = url.split("&");
+        for (String keyValue : keyValues) {
+            if (StringUtils.isBlank(keyValue)) {
+                continue;
+            }
+            String[] arr = keyValue.split("=");
+            String key = arr[0];
+            String value = arr.length > 1 ? arr[1] : "";
+            map.put(key, value);
+        }
+
+        return map;
     }
 }

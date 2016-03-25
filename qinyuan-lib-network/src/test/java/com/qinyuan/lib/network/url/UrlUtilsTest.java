@@ -1,6 +1,9 @@
 package com.qinyuan.lib.network.url;
 
+import org.assertj.core.data.MapEntry;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,5 +27,20 @@ public class UrlUtilsTest {
         assertThat(UrlUtils.getHost("www.baidu.com")).isEqualTo("www.baidu.com");
         assertThat(UrlUtils.getHost("www.baidu.com/")).isEqualTo("www.baidu.com");
         assertThat(UrlUtils.getHost("www.baidu.com/index.php")).isEqualTo("www.baidu.com");
+    }
+
+    @Test
+    public void testParseParameters() {
+        Map<String, String> map = UrlUtils.parseParameters("test.html?key1=value1&key2=value2");
+        assertThat(map).hasSize(2).contains(MapEntry.entry("key1", "value1"), MapEntry.entry("key2", "value2"));
+
+        map = UrlUtils.parseParameters("test?key1=value1&key2=value2&");
+        assertThat(map).hasSize(2).contains(MapEntry.entry("key1", "value1"), MapEntry.entry("key2", "value2"));
+
+        map = UrlUtils.parseParameters("test.html");
+        assertThat(map).isEmpty();
+
+        map = UrlUtils.parseParameters("key1=value1&key2=value2&");
+        assertThat(map).isEmpty();
     }
 }
