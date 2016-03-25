@@ -60,13 +60,21 @@ public class UrlUtils {
         }
     }
 
+    public static String trimParameters(String url) {
+        if (StringUtils.isBlank(url) || !url.contains("?")) {
+            return url;
+        } else {
+            return url.replaceAll("\\?.*$", "");
+        }
+    }
+
     public static Map<String, String> parseParameters(String url) {
         Map<String, String> map = new HashMap<>();
         if (StringUtils.isBlank(url) || !url.contains("?")) {
             return map;
         }
 
-        url = url.replaceAll("^.*\\?", "");
+        url = url.replaceAll("^.*\\?", "").replaceAll("#.*$", "");
         String[] keyValues = url.split("&");
         for (String keyValue : keyValues) {
             if (StringUtils.isBlank(keyValue)) {

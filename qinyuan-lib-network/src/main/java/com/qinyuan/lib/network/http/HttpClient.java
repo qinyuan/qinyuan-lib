@@ -76,30 +76,6 @@ public class HttpClient {
         return this.lastConnectTime;
     }
 
-    /*public CloseableHttpResponse postResponse(String url) throws IOException {
-        if (!url.contains("://")) {
-            url = "http://" + url;
-        }
-        HttpPost post = new HttpPost(url);
-        post.setHeader("User-Agent", this.userAgent);
-
-        // set config
-        RequestConfig.Builder configBuilder = RequestConfig.custom()
-                .setConnectTimeout(this.timeout)
-                .setConnectionRequestTimeout(this.requestTimeout);
-        if (proxy != null) {
-            configBuilder.setProxy(new HttpHost(proxy.getHost(), proxy.getPort(), proxy.getType()));
-        }
-        post.setConfig(configBuilder.build());
-
-        List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("hello", "world"));
-        post.setEntity(new UrlEncodedFormEntity(params));
-
-        LOGGER.info("connecting {} with proxy {}", url, proxy);
-        return clientBuilder.build().execute(post);
-    }*/
-
     private HttpRequestBase getRequest(String url) {
         switch (method) {
             case POST:

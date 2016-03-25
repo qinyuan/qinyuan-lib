@@ -1,6 +1,7 @@
 package com.qinyuan.lib.network.http;
 
 import com.qinyuan.lib.lang.concurrent.ThreadUtils;
+import com.qinyuan.lib.network.url.UrlUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -10,14 +11,19 @@ import org.apache.commons.lang3.StringUtils;
 public class TimingVisitor {
     public final static int DEFAULT_INTERVAL = 60;  // default interval is 1 minute
     private int interval = DEFAULT_INTERVAL;
-    private String pages;
+    private String getUrls;
+    private String postUrls;
 
     public void setInterval(int interval) {
         this.interval = interval;
     }
 
-    public void setPages(String pages) {
-        this.pages = pages;
+    public void setGetUrls(String getUrls) {
+        this.getUrls = getUrls;
+    }
+
+    public void setPostUrls(String postUrls) {
+        this.postUrls = postUrls;
     }
 
     public void init() {
@@ -27,23 +33,31 @@ public class TimingVisitor {
                 while (true) {
                     ThreadUtils.sleep(interval);
                     try {
-                        if (StringUtils.isBlank(pages)) {
-                            continue;
+                        if (StringUtils.isNotBlank(getUrls)) {
+                            visitUrl(getUrls, false);
+                        }
+                        if (StringUtils.isNotBlank(postUrls)) {
+                            visitUrl(postUrls, true);
                         }
 
-                        String[] urls = pages.split(",");
-                        for (String url : urls) {
-                            if (isLocalUrl(url)) {
-                                url = " http://localhost/" + url;
-                            }
-                            new HttpClient().get(url);
-                        }
+
                     } catch (Throwable e) {
                         e.printStackTrace();
                     }
                 }
             }
         }).start();
+    }
+
+    private void visitUrl(String urls, boolean post) {
+        for (String url : urls.split(",")) {
+            if (isLocalUrl(url)) {
+                url = "http://localhost/" + url;
+            }
+            HttpClient client = new HttpClient();
+            client.setMethod(post ? HttpClient.Method.POST : HttpClient.Method.GET);
+            client.get(UrlUtils.trimParameters(url), UrlUtils.parseParameters(url));
+        }
     }
 
     private boolean isLocalUrl(String url) {
