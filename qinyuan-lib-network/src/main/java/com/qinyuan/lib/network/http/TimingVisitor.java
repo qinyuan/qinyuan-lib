@@ -3,12 +3,15 @@ package com.qinyuan.lib.network.http;
 import com.qinyuan.lib.lang.concurrent.ThreadUtils;
 import com.qinyuan.lib.network.url.UrlUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to visit certain url by given interval regularly
  * Created by qinyuan on 16-1-11.
  */
 public class TimingVisitor {
+    private final static Logger LOGGER = LoggerFactory.getLogger(TimingVisitor.class);
     public final static int DEFAULT_INTERVAL = 60;  // default interval is 1 minute
     private int interval = DEFAULT_INTERVAL;
     private String getUrls;
@@ -56,7 +59,8 @@ public class TimingVisitor {
             }
             HttpClient client = new HttpClient();
             client.setMethod(post ? HttpClient.Method.POST : HttpClient.Method.GET);
-            client.get(UrlUtils.trimParameters(url), UrlUtils.parseParameters(url));
+            String content = client.getContent(UrlUtils.trimParameters(url), UrlUtils.parseParameters(url));
+            LOGGER.info("Content FROM url {}: {}", url, content);
         }
     }
 
