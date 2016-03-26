@@ -16,6 +16,21 @@ public class TimingVisitor {
     private int interval = DEFAULT_INTERVAL;
     private String getUrls;
     private String postUrls;
+    private String host = "localhost";
+    private int port = 80;
+    private String context = "";
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
 
     public void setInterval(int interval) {
         this.interval = interval;
@@ -55,7 +70,15 @@ public class TimingVisitor {
     private void visitUrl(String urls, boolean post) {
         for (String url : urls.split(",")) {
             if (isLocalUrl(url)) {
-                url = "http://localhost/" + url;
+                if (StringUtils.isNotBlank(context)) {
+                    url = context + "/" + url;
+                }
+                url = host + ":" + port + "/" + url;
+                while (url.startsWith("/")) {
+                    url = url.substring(1);
+                }
+                url = url.replaceAll("/{2,}", "/");
+                url = "http://" + url;
             }
             HttpClient client = new HttpClient();
             client.setMethod(post ? HttpClient.Method.POST : HttpClient.Method.GET);
